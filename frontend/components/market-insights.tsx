@@ -72,7 +72,6 @@ export default function MarketInsights() {
         <div className="mb-12 text-center">
           <div className="flex items-center justify-center mb-4">
             <h2 className="text-3xl font-bold">AI-Powered Market Insights</h2>
-            <Brain className="ml-2 h-6 w-6 text-blue-500" />
           </div>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Our AI analyzes market trends and property data to provide you with the most accurate investment insights.

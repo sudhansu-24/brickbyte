@@ -7,12 +7,12 @@ import { Button } from "@/components/ui/button"
 import { MapPin, TrendingUp, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// Mock data for featured properties
+// Featured properties data
 const featuredProperties = [
   {
     id: 1,
     name: "Skyline Towers",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/skyline.avif", // Updated Image Path
     location: "New York, NY",
     tokenPrice: 125.5,
     projectedROI: 12.3,
@@ -21,7 +21,7 @@ const featuredProperties = [
   {
     id: 2,
     name: "Oceanview Residences",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/oceanView.avif",
     location: "Miami, FL",
     tokenPrice: 87.25,
     projectedROI: 9.8,
@@ -30,7 +30,7 @@ const featuredProperties = [
   {
     id: 3,
     name: "Tech Hub Office Park",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/techHub.avif",
     location: "San Francisco, CA",
     tokenPrice: 210.75,
     projectedROI: 15.2,
@@ -39,7 +39,7 @@ const featuredProperties = [
   {
     id: 4,
     name: "Mountain View Apartments",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/mountain.avif",
     location: "Denver, CO",
     tokenPrice: 65.3,
     projectedROI: 8.5,
@@ -73,7 +73,7 @@ export default function FeaturedProperties() {
             >
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src={property.image || "/placeholder.svg"}
+                  src={property.image}
                   alt={property.name}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 />
@@ -123,4 +123,3 @@ export default function FeaturedProperties() {
     </section>
   )
 }
-

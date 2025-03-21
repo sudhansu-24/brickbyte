@@ -13,7 +13,7 @@ const portfolioProperties = [
   {
     id: 1,
     name: "Skyline Towers",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/skyline.avif", // Updated image path
     tokenValue: 125.5,
     monthlyIncome: 42.3,
     projectedROI: 12.3,
@@ -22,7 +22,7 @@ const portfolioProperties = [
   {
     id: 2,
     name: "Oceanview Residences",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/oceanView.avif",
     tokenValue: 87.25,
     monthlyIncome: 28.5,
     projectedROI: 9.8,
@@ -31,7 +31,7 @@ const portfolioProperties = [
   {
     id: 3,
     name: "Tech Hub Office Park",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/techHub.avif",
     tokenValue: 210.75,
     monthlyIncome: 65.2,
     projectedROI: 15.2,
@@ -82,7 +82,7 @@ export default function Portfolio() {
                 <Card key={property.id} className="overflow-hidden">
                   <div className="h-40 overflow-hidden">
                     <img
-                      src={property.image || "/placeholder.svg"}
+                      src={property.image}
                       alt={property.name}
                       className="w-full h-full object-cover"
                     />
@@ -138,122 +138,9 @@ export default function Portfolio() {
                 </Card>
               ))}
             </div>
-
-            {portfolioProperties.length === 0 && (
-              <div className="text-center py-12">
-                <AlertCircle className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-                <h3 className="text-xl font-semibold mb-2">No Properties Yet</h3>
-                <p className="text-muted-foreground mb-6">
-                  You haven't invested in any properties yet. Start exploring our marketplace to begin your investment
-                  journey.
-                </p>
-                <Button>Explore Properties</Button>
-              </div>
-            )}
-          </TabsContent>
-
-          <TabsContent value="performance">
-            <Card>
-              <CardHeader>
-                <CardTitle>Portfolio Performance</CardTitle>
-                <CardDescription>Track your overall investment performance</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-8">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <Card>
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground">Total Value</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-2xl font-bold">$423.50</div>
-                        <p className="text-xs text-muted-foreground">+12.5% from initial investment</p>
-                      </CardContent>
-                    </Card>
-                    <Card>
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground">Monthly Income</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-2xl font-bold">$136.00</div>
-                        <p className="text-xs text-muted-foreground">Passive rental income</p>
-                      </CardContent>
-                    </Card>
-                    <Card>
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground">Staking Rewards</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-2xl font-bold">$28.75</div>
-                        <p className="text-xs text-muted-foreground">From staked property tokens</p>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="transactions">
-            <Card>
-              <CardHeader>
-                <CardTitle>Recent Transactions</CardTitle>
-                <CardDescription>Your recent property investment activities</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="rounded-md border">
-                    <div className="p-4 flex items-center justify-between">
-                      <div className="flex items-center">
-                        <Landmark className="h-8 w-8 mr-4 text-blue-500" />
-                        <div>
-                          <p className="font-medium">Purchased Tokens</p>
-                          <p className="text-sm text-muted-foreground">Skyline Towers - 5 tokens</p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-medium">$627.50</p>
-                        <p className="text-sm text-muted-foreground">Mar 15, 2025</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-md border">
-                    <div className="p-4 flex items-center justify-between">
-                      <div className="flex items-center">
-                        <Landmark className="h-8 w-8 mr-4 text-green-500" />
-                        <div>
-                          <p className="font-medium">Staked Tokens</p>
-                          <p className="text-sm text-muted-foreground">Tech Hub Office Park - 2 tokens</p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-medium">$421.50</p>
-                        <p className="text-sm text-muted-foreground">Mar 10, 2025</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-md border">
-                    <div className="p-4 flex items-center justify-between">
-                      <div className="flex items-center">
-                        <Landmark className="h-8 w-8 mr-4 text-amber-500" />
-                        <div>
-                          <p className="font-medium">Received Rental Income</p>
-                          <p className="text-sm text-muted-foreground">Oceanview Residences</p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-medium">$28.50</p>
-                        <p className="text-sm text-muted-foreground">Mar 1, 2025</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </TabsContent>
         </Tabs>
       </div>
     </section>
   )
 }
-

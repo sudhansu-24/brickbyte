@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "./mode-toggle"
@@ -56,28 +57,35 @@ export default function Navbar() {
       )}
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        {/* Logo with Link */}
         <Link href="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-            BrickByte
-          </span>
-        </Link>
+  <Image 
+    src="/logo1.png" 
+    alt="BrickByte Logo" 
+    width={140} 
+    height={40} 
+    priority
+    className="invert dark:invert-0 transition-all duration-300"
+  />
+</Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           {menuItems.map((item) => (
-            <Link key={item.name} href={item.href} className="text-sm font-medium transition-colors hover:text-primary">
+            <Link key={item.name} href={item.href} className="text-base font-medium transition-colors hover:font-bold hover:textunderline">
               {item.name}
             </Link>
           ))}
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
+          {/* Connect Wallet Button with Corrected Colors */}
           <Button
             onClick={handleConnectWallet}
-            variant={isWalletConnected ? "outline" : "default"}
+            variant="default"
             className={cn(
-              "transition-all",
-              isWalletConnected ? "border-green-500 text-green-500 hover:bg-green-500/10" : "",
+              "transition-all text-white bg-gradient-to-r from-blue-700 to-cyan-500 hover:from-blue-800 hover:to-cyan-600",
+              isWalletConnected ? "border-green-400 text-green-300 bg-green-900/10 hover:bg-green-900/20" : ""
             )}
           >
             <Wallet className="mr-2 h-4 w-4" />
@@ -115,10 +123,10 @@ export default function Navbar() {
               handleConnectWallet()
               setIsMenuOpen(false)
             }}
-            variant={isWalletConnected ? "outline" : "default"}
+            variant="default"
             className={cn(
-              "w-full transition-all",
-              isWalletConnected ? "border-green-500 text-green-500 hover:bg-green-500/10" : "",
+              "w-full transition-all text-white bg-gradient-to-r from-blue-700 to-cyan-900 hover:from-blue-800 hover:to-cyan-600",
+              isWalletConnected ? "border-green-400 text-green-300 bg-green-900/10 hover:bg-green-900/20" : ""
             )}
           >
             <Wallet className="mr-2 h-4 w-4" />
@@ -129,4 +137,3 @@ export default function Navbar() {
     </header>
   )
 }
-
