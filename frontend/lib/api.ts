@@ -12,18 +12,25 @@ const API_URL = 'http://localhost:3001';
 console.log('Using API URL:', API_URL);
 
 // Function to test if server is reachable
-export const testBackendConnection = async (): Promise<boolean> => {
+export const testBackendConnection = async () => {
   try {
-    const response = await fetch(`${API_URL}`, { 
+    const response = await fetch('http://localhost:3001/test', {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-      // Short timeout to fail fast if server is not responding
-      signal: AbortSignal.timeout(3000) 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      signal: AbortSignal.timeout(2000) // Timeout after 2 seconds
     });
-    return response.ok;
+    
+    if (!response.ok) {
+      throw new Error('Backend server is not available');
+    }
+    
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error('Backend connection test failed:', error);
-    return false;
+    throw new Error('Backend server is not available. Please check if the server is running.');
   }
 };
 
@@ -216,36 +223,27 @@ export const authService = {
     }
   },
 
-  walletNonce: async (address: string) => {
-    // First check if backend is available
-    const isBackendAvailable = await testBackendConnection();
-    if (!isBackendAvailable) {
-      throw new Error('Backend server is not available. Please check if the server is running.');
-    }
-    
+  walletNonce: async (walletAddress: string) => {
     try {
-      console.log('Requesting nonce for wallet:', address);
-      const response = await api.get(`/wallet/nonce/${address}`);
-      console.log('Nonce response:', response.data);
+      await testBackendConnection();
       
-      // Ensure we have a valid nonce in the response
-      if (response.data && (response.data.nonce || response.data.nonce === 0)) {
-        // Convert nonce to string format if it's not already
-        const nonce = String(response.data.nonce);
-        return { nonce };
-      } else {
-        console.error('Invalid nonce format received:', response.data);
-        throw new Error('Invalid nonce received from server');
+      const response = await fetch('http://localhost:3001/api/wallet/nonce', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ walletAddress }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch nonce');
       }
-    } catch (error: any) {
-      console.error('Wallet nonce error:', error);
-      
-      if (axios.isAxiosError(error) && !error.response) {
-        throw new Error('Network error: Backend server is not responding.');
-      }
-      
-      const errorMessage = error.response?.data?.message || error.message || 'Failed to get wallet nonce';
-      throw new Error(errorMessage);
+
+      const data = await response.json();
+      return data.nonce;
+    } catch (error) {
+      console.error('Failed to fetch nonce:', error);
+      throw error;
     }
   },
   

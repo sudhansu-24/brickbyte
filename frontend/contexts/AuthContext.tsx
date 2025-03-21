@@ -21,7 +21,7 @@ type AuthContextType = {
   register: (userData: { name: string; email: string; password: string; walletAddress?: string }) => Promise<void>;
   logout: () => void;
   walletConnected: boolean;
-  connectWallet: () => Promise<void>;
+  connectWallet: () => Promise<string>;
   disconnectWallet: () => void;
 };
 
@@ -31,7 +31,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [walletConnected, setWalletConnected] = useState(false);
-  const [serverAvailable, setServerAvailable] = useState<boolean>(true);
   const router = useRouter();
   const { toast } = useToast();
   
@@ -45,13 +44,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       .then(res => res.ok)
       .catch(() => false);
       
-      setServerAvailable(available);
       return available;
     } catch (error) {
       console.error('Server availability check failed:', error);
-      setServerAvailable(false);
       return false;
     }
+  };
+
+  const testBackendConnection = async () => {
+    if (!(await checkServerAvailability())) {
+      throw new Error('Cannot connect to server. Please try again later.');
+    }
+  };
+
+  const walletNonce = async (walletAddress: string) => {
+    const response = await fetch(`http://localhost:3001/api/auth/nonce/${walletAddress}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch nonce');
+    }
+    const data = await response.json();
+    return data.nonce;
   };
 
   // Check if user is logged in on mount
@@ -131,11 +143,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsLoading(true);
 
       // Check if the server is available first
-      if (!serverAvailable) {
-        const isNowAvailable = await checkServerAvailability();
-        if (!isNowAvailable) {
-          throw new Error('Cannot connect to server. Please try again later.');
-        }
+      if (!(await checkServerAvailability())) {
+        throw new Error('Cannot connect to server. Please try again later.');
       }
 
       // Log that we're about to register
@@ -202,96 +211,70 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Connect wallet function (using MetaMask)
-  const connectWallet = async (): Promise<void> => {
+  const connectWallet = async () => {
     try {
-      // Check server availability first
-      if (!serverAvailable) {
-        const isNowAvailable = await checkServerAvailability();
-        if (!isNowAvailable) {
-          throw new Error('Cannot connect to server. Please try again later.');
-        }
+      if (typeof window === 'undefined' || !window.ethereum) {
+        throw new Error('Ethereum provider not found. Please install MetaMask or another wallet.');
       }
 
-      // Check if MetaMask is installed
-      if (typeof window.ethereum === "undefined") {
-        toast({
-          title: "MetaMask not found",
-          description: "Please install MetaMask browser extension",
-          variant: "destructive",
-        });
-        return;
-      }
+      await testBackendConnection();
+      
+      // Request account access
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      });
 
-      // Request accounts
-      console.log('Requesting Ethereum accounts...');
-      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
       const walletAddress = accounts[0];
       console.log('Connected to wallet address:', walletAddress);
 
-      // Get nonce from backend
+      // Get nonce for wallet
+      const nonce = await walletNonce(walletAddress);
       console.log('Fetching nonce for wallet:', walletAddress);
-      
-      // Step 1: Get nonce from server
-      const nonceResponse = await authService.walletNonce(walletAddress);
-      const nonce = nonceResponse.nonce;
-      console.log('Received nonce:', nonce);
-      
-      // Step 2: Request signature from wallet
-      console.log('Requesting signature with nonce:', nonce);
-      const message = `Sign this message to verify your wallet ownership. Nonce: ${nonce}`;
+
+      // Sign message with nonce
+      const message = `Welcome to BrickByte! Please sign this message to verify your wallet ownership. Nonce: ${nonce}`;
       const signature = await window.ethereum.request({
-        method: "personal_sign",
+        method: 'personal_sign',
         params: [message, walletAddress],
       });
-      console.log('Signature obtained successfully');
 
-      // Step 3: Verify signature with backend
-      console.log('Verifying signature with backend...');
-      const response = await authService.walletLogin(walletAddress, signature, nonce);
-      console.log('Wallet verification successful:', response);
-      
-      // Step 4: Set user state and redirect
-      if (response && response.user) {
-        setUser(response.user);
-        setWalletConnected(true);
-        
-        toast({
-          title: "Wallet connected",
-          description: `Connected to wallet ${walletAddress.substring(0, 6)}...${walletAddress.substring(38)}`,
-        });
-
-        // Redirect to dashboard or home 
-        // Return void here to ensure Promise<void> return type
-        router.push("/dashboard");
-        return;
-      } else {
-        console.error('Invalid response format from wallet login:', response);
-        throw new Error('Invalid response from server');
-      }
-    } catch (error: any) {
-      console.error("Wallet connection error:", error);
-      toast({
-        title: "Wallet connection failed",
-        description: error.message || "Could not connect to wallet",
-        variant: "destructive",
+      // Send signature to backend for verification
+      const response = await fetch('http://localhost:3001/api/auth/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          walletAddress,
+          signature,
+          nonce,
+        }),
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to verify wallet signature');
+      }
+
+      const data = await response.json();
+      setUser(data.user);
+      setWalletConnected(true);
+      
+      // Store wallet address in localStorage
+      localStorage.setItem('walletAddress', walletAddress);
+      
+      return walletAddress;
+    } catch (error: any) {
+      console.error('Wallet connection error:', error);
+      setWalletConnected(false);
+      throw new Error('Failed to connect wallet: ' + error.message);
     }
   };
 
   // Disconnect wallet function
   const disconnectWallet = () => {
+    setUser(null);
     setWalletConnected(false);
-    // If user was authenticated only via wallet, log them out completely
-    if (user?.walletAddress && !user.email) {
-      logout();
-    } else if (user?.walletAddress) {
-      // If user has both wallet and email, just remove wallet
-      setUser({ ...user, walletAddress: undefined });
-    }
-    toast({
-      title: "Wallet disconnected",
-      description: "Your wallet has been disconnected",
-    });
+    localStorage.removeItem('walletAddress');
   };
 
   return (
