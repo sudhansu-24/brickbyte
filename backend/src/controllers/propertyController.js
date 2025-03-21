@@ -112,11 +112,14 @@ const getProperty = async (req, res) => {
         property = await Property.create({
           name: 'Ocean View Condo',
           location: 'California',
+          description: 'Beautiful oceanfront property',
           totalTokens: 1000,
           tokensAvailable: 1000,
           tokenPrice: 0.05,
-          owner: req.user.walletAddress,
-          contractAddress: '0x1234567890abcdef'
+          rentalIncome: 500,
+          owner: req.user?.walletAddress || '0x1234567890abcdef',
+          contractAddress: '0x1234567890abcdef',
+          imageUrl: 'image1.jpg'
         });
       } else {
         return errorResponse(res, 'Invalid property ID', 400);
@@ -130,11 +133,14 @@ const getProperty = async (req, res) => {
         property = await Property.create({
           name: 'Ocean View Condo',
           location: 'California',
+          description: 'Beautiful oceanfront property',
           totalTokens: 1000,
           tokensAvailable: 1000,
           tokenPrice: 0.05,
-          owner: req.user.walletAddress,
-          contractAddress: '0x1234567890abcdef'
+          rentalIncome: 500,
+          owner: req.user?.walletAddress || '0x1234567890abcdef',
+          contractAddress: '0x1234567890abcdef',
+          imageUrl: 'image1.jpg'
         });
       } else {
         return errorResponse(res, 'Property not found', 404);

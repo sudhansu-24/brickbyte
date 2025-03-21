@@ -18,6 +18,13 @@ describe('Market Insights Tests', () => {
       password: 'password123',
       walletAddress: '0x1234567890abcdef'
     });
+    
+    // Login to get auth token
+    const loginResponse = await request(app)
+      .post('/api/users/login')
+      .send({ email: 'market@example.com', password: 'password123' });
+    
+    authToken = loginResponse.body.data.token;
 
     // Create test property
     const property = await Property.create({

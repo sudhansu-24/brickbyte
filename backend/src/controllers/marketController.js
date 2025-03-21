@@ -55,13 +55,11 @@ exports.getMarketInsights = async (req, res) => {
     const recommendation = generateRecommendation(property, prediction.price, prediction.roi);
 
     return successResponse(res, {
-      data: {
-        predictedPrice: prediction.price,
-        confidence: prediction.confidence,
-        marketTrend,
-        recommendation,
-        responseTime: Date.now() - req._startTime
-      }
+      predictedPrice: prediction.price,
+      confidence: prediction.confidence,
+      marketTrend,
+      recommendation,
+      responseTime: Date.now() - req._startTime
     });
   } catch (error) {
     console.error('Market Insights Error:', error);
@@ -74,7 +72,7 @@ exports.getMarketInsights = async (req, res) => {
 
 exports.adjustTokenPrice = async (req, res) => {
   try {
-    const { propertyId } = req.params;
+    const { propertyId, newPrice } = req.body;
     const property = await Property.findById(propertyId);
     if (!property) {
       return errorResponse(res, 'Property not found', 404);
@@ -98,7 +96,7 @@ exports.adjustTokenPrice = async (req, res) => {
     await tx.wait();
 
     // Update price in MongoDB
-    property.tokenPrice = adjustment.price;
+    property.tokenPrice = newPrice || adjustment.price;
     property.lastPriceUpdate = new Date();
     property.priceHistory.push({
       price: adjustment.price,
@@ -113,12 +111,10 @@ exports.adjustTokenPrice = async (req, res) => {
     await property.save();
 
     return successResponse(res, {
-      data: {
-        tokenPrice: adjustment.price,
-        adjustmentReason: adjustment.reason,
-        aiConfidence: adjustment.confidence || 0.8,
-        timestamp: new Date()
-      }
+      tokenPrice: newPrice || adjustment.price,
+      adjustmentReason: adjustment.reason,
+      aiConfidence: adjustment.confidence || 0.8,
+      timestamp: new Date()
     });
   } catch (error) {
     console.error('Price Adjustment Error:', error);
