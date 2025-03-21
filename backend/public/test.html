@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrickByte API Tester</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    pre {
+      background-color: #f8f9fa;
+      padding: 12px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    input {
+      padding: 8px;
+      margin-bottom: 10px;
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>BrickByte API Tester</h1>
+  
+  <div class="card">
+    <h2>Server Status</h2>
+    <button id="checkStatus">Check Server Status</button>
+    <pre id="statusResult">Click button to check server status</pre>
+  </div>
+
+  <div class="card">
+    <h2>User Registration</h2>
+    <div>
+      <label for="regName">Name:</label>
+      <input type="text" id="regName" placeholder="Enter name" value="Demo User">
+    </div>
+    <div>
+      <label for="regEmail">Email:</label>
+      <input type="email" id="regEmail" placeholder="Enter email" value="demo@example.com">
+    </div>
+    <div>
+      <label for="regPassword">Password:</label>
+      <input type="password" id="regPassword" placeholder="Enter password" value="password123">
+    </div>
+    <button id="register">Register User</button>
+    <pre id="regResult">Registration results will appear here</pre>
+  </div>
+
+  <div class="card">
+    <h2>Wallet Connection</h2>
+    <div>
+      <label for="walletAddress">Wallet Address:</label>
+      <input type="text" id="walletAddress" placeholder="Enter wallet address" value="0x123456789abcdef">
+    </div>
+    <button id="getNonce">Get Nonce</button>
+    <button id="verifyWallet">Verify Wallet</button>
+    <pre id="walletResult">Wallet connection results will appear here</pre>
+  </div>
+
+  <div class="card">
+    <h2>Current User</h2>
+    <button id="getCurrentUser">Get Current User</button>
+    <button id="logout">Logout</button>
+    <pre id="currentUserResult">Current user data will appear here</pre>
+  </div>
+
+  <script>
+    // API base URL
+    const API_URL = 'http://localhost:3001';
+    let currentNonce = '';
+    let currentToken = localStorage.getItem('auth_token') || '';
+
+    // Check server status
+    document.getElementById('checkStatus').addEventListener('click', async () => {
+      try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        document.getElementById('statusResult').textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        document.getElementById('statusResult').textContent = `Error: ${error.message}`;
+      }
+    });
+
+    // Register user
+    document.getElementById('register').addEventListener('click', async () => {
+      try {
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const password = document.getElementById('regPassword').value;
+
+        const response = await fetch(`${API_URL}/auth/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
+        document.getElementById('regResult').textContent = JSON.stringify(data, null, 2);
+
+        if (data.token) {
+          currentToken = data.token;
+          localStorage.setItem('auth_token', data.token);
+        }
+      } catch (error) {
+        document.getElementById('regResult').textContent = `Error: ${error.message}`;
+      }
+    });
+
+    // Get nonce
+    document.getElementById('getNonce').addEventListener('click', async () => {
+      try {
+        const address = document.getElementById('walletAddress').value;
+        const response = await fetch(`${API_URL}/wallet/nonce/${address}`);
+        const data = await response.json();
+        currentNonce = data.nonce;
+        document.getElementById('walletResult').textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        document.getElementById('walletResult').textContent = `Error: ${error.message}`;
+      }
+    });
+
+    // Verify wallet
+    document.getElementById('verifyWallet').addEventListener('click', async () => {
+      try {
+        const address = document.getElementById('walletAddress').value;
+        if (!currentNonce) {
+          throw new Error('Please get a nonce first');
+        }
+
+        // In a real app, we would sign the message with the wallet
+        // Here we're just using a mock signature
+        const mockSignature = 'mock-signature-' + Math.random().toString(36).substring(2);
+
+        const response = await fetch(`${API_URL}/wallet/verify`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            address,
+            signature: mockSignature,
+            nonce: currentNonce
+          })
+        });
+
+        const data = await response.json();
+        document.getElementById('walletResult').textContent = JSON.stringify(data, null, 2);
+
+        if (data.token) {
+          currentToken = data.token;
+          localStorage.setItem('auth_token', data.token);
+        }
+      } catch (error) {
+        document.getElementById('walletResult').textContent = `Error: ${error.message}`;
+      }
+    });
+
+    // Get current user
+    document.getElementById('getCurrentUser').addEventListener('click', async () => {
+      try {
+        if (!currentToken) {
+          throw new Error('Not authenticated. Please login or register first.');
+        }
+
+        const response = await fetch(`${API_URL}/auth/me`, {
+          headers: {
+            'Authorization': `Bearer ${currentToken}`
+          }
+        });
+
+        const data = await response.json();
+        document.getElementById('currentUserResult').textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        document.getElementById('currentUserResult').textContent = `Error: ${error.message}`;
+      }
+    });
+
+    // Logout
+    document.getElementById('logout').addEventListener('click', () => {
+      localStorage.removeItem('auth_token');
+      currentToken = '';
+      document.getElementById('currentUserResult').textContent = 'Logged out successfully';
+    });
+
+    // Check if token exists on page load
+    window.addEventListener('load', () => {
+      if (currentToken) {
+        document.getElementById('currentUserResult').textContent = 'Token found. Click "Get Current User" to fetch user data.';
+      }
+    });
+  </script>
+</body>
+</html>
