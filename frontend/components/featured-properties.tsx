@@ -21,7 +21,7 @@ const featuredProperties = [
   {
     id: 2,
     name: "Oceanview Residences",
-    image: "/oceanView.avif",
+    image: "/oceanView.avif", // Updated Image Path
     location: "Miami, FL",
     tokenPrice: 87.25,
     projectedROI: 9.8,
@@ -30,7 +30,7 @@ const featuredProperties = [
   {
     id: 3,
     name: "Tech Hub Office Park",
-    image: "/techHub.avif",
+    image: "/techHub.avif", // Updated Image Path
     location: "San Francisco, CA",
     tokenPrice: 210.75,
     projectedROI: 15.2,
@@ -39,7 +39,7 @@ const featuredProperties = [
   {
     id: 4,
     name: "Mountain View Apartments",
-    image: "/mountain.avif",
+    image: "/mountain.avif", // Updated Image Path
     location: "Denver, CO",
     tokenPrice: 65.3,
     projectedROI: 8.5,
