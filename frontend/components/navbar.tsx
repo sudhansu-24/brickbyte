@@ -90,6 +90,10 @@ export default function Navbar() {
             alt="BrickByte Logo" 
             width={140} 
             height={40} 
+            style={{
+              width: 140,
+              height: 40,
+            }}
             priority
             className="invert dark:invert-0 transition-all duration-300"
           />

@@ -4,47 +4,26 @@
  */
 
 import axios from 'axios';
+import { createClient } from '@supabase/supabase-js'
+import { AuthContext } from '@/contexts/AuthContext'
+import { useAuth } from '@/contexts/AuthContext'
 
 // Base URL for API requests - ensure it's always set correctly
-const API_URL = 'http://localhost:3001';
+const API_URL = 'http://localhost:3001'; // Hardcode for development
 
 // Log the API URL being used
 console.log('Using API URL:', API_URL);
 
-// Function to test if server is reachable
-export const testBackendConnection = async () => {
-  try {
-    const response = await fetch('http://localhost:3001/test', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      signal: AbortSignal.timeout(2000) // Timeout after 2 seconds
-    });
-    
-    if (!response.ok) {
-      throw new Error('Backend server is not available');
-    }
-    
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Backend connection test failed:', error);
-    throw new Error('Backend server is not available. Please check if the server is running.');
-  }
-};
-
 // Create axios instance with default config
 const api = axios.create({
   baseURL: API_URL,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000, // 10 second timeout
-  withCredentials: true // Enable cookies for cross-origin requests if needed
 });
 
-// Request interceptor for adding auth token
+// Add a request interceptor
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('auth_token');
@@ -56,22 +35,69 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response interceptor for handling errors
+// Add a response interceptor
 api.interceptors.response.use(
   (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
-    
-    // If error is 401 Unauthorized and not already retrying
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      // Clear token and redirect to login
-      localStorage.removeItem('auth_token');
-      window.location.href = '/login';
+  (error) => {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.error('API Error:', error.response.data);
+      throw error.response.data;
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.error('No response received:', error.request);
+      throw new Error('Network Error');
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.error('Error:', error.message);
+      throw error;
     }
-    
-    return Promise.reject(error);
   }
 );
+
+// Function to test if server is reachable
+export const testBackendConnection = async () => {
+  try {
+    const response = await api.get('/', {
+      withCredentials: true,
+    });
+    return response.data.status === 'Server is running!';
+  } catch (error) {
+    console.error('Backend connection test failed:', error);
+    return false;
+  }
+};
+
+// Get wallet nonce
+export const walletNonce = async (walletAddress: string) => {
+  try {
+    const response = await api.get(`/auth/nonce/${walletAddress}`, {
+      withCredentials: true,
+    });
+    return response.data.nonce;
+  } catch (error) {
+    console.error('Failed to fetch nonce:', error);
+    throw error;
+  }
+};
+
+// Verify wallet signature
+export const verifyWalletSignature = async (walletAddress: string, signature: string, nonce: string) => {
+  try {
+    const response = await api.post('/auth/login', {
+      walletAddress,
+      signature,
+      nonce,
+    }, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to verify wallet signature:', error);
+    throw error;
+  }
+};
 
 // Authentication services
 export const authService = {
@@ -223,30 +249,6 @@ export const authService = {
     }
   },
 
-  walletNonce: async (walletAddress: string) => {
-    try {
-      await testBackendConnection();
-      
-      const response = await fetch('http://localhost:3001/api/wallet/nonce', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ walletAddress }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch nonce');
-      }
-
-      const data = await response.json();
-      return data.nonce;
-    } catch (error) {
-      console.error('Failed to fetch nonce:', error);
-      throw error;
-    }
-  },
-  
   logout: () => {
     localStorage.removeItem('auth_token');
   },

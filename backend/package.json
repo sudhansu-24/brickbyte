@@ -22,7 +22,7 @@
     "hardhat": "^2.22.19",
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.30.1",
-    "mongoose": "^8.12.1"
+    "mongoose": "^8.12.2"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-ethers": "^3.0.8",
