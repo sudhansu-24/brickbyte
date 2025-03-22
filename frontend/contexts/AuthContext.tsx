@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-=======
 'use client';
-
->>>>>>> feature-integration
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import api from '../lib/api';
 import { toast } from 'react-toastify';
