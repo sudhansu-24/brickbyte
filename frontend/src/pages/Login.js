@@ -23,6 +23,7 @@ const Login = () => {
     try {
       setLoading(true);
       setError('');
+      console.log('Attempting login...');
 
       const response = await fetch('http://localhost:3001/api/auth/login', {
         method: 'POST',
@@ -33,21 +34,28 @@ const Login = () => {
       });
 
       const data = await response.json();
+      console.log('Login response:', data);
 
       if (!response.ok) {
         throw new Error(data.error || 'Login failed');
       }
 
       if (data.token) {
+        console.log('Login successful, storing token and user data');
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify({
           id: data.user.id,
           email: data.user.email,
           walletAddress: data.user.walletAddress
         }));
-        navigate('/properties');
+        
+        setTimeout(() => {
+          console.log('Navigating to /properties');
+          window.location.href = '/properties';
+        }, 0);
       }
     } catch (err) {
+      console.error('Login error:', err);
       setError(err.message || 'Login failed');
     } finally {
       setLoading(false);
@@ -100,8 +108,6 @@ const Login = () => {
           </div>
 
           <div>
-
-          
             <button
               type="submit"
               disabled={loading}
@@ -125,4 +131,4 @@ const Login = () => {
   );
 };
 
-export default Login; 
+export default Login;

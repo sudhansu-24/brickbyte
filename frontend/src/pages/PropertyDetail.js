@@ -298,6 +298,14 @@ const PropertyDetail = () => {
           </div>
         )}
 
+
+      <div className='flex flex-row gap-4'>
+
+        <img
+                  src={property.image_url}
+                  alt={property.name}
+                  className="w-[50%] h-[50%] object-cover rounded-lg border-2 border-gray-300 shadow-lg"
+                  />
         <div className="bg-white shadow overflow-hidden sm:rounded-lg">
           <div className="px-4 py-5 sm:px-6">
             <div className="flex justify-between items-center">
@@ -329,6 +337,7 @@ const PropertyDetail = () => {
             </dl>
           </div>
         </div>
+      </div>
 
         <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
           <div className="bg-white shadow overflow-hidden sm:rounded-lg">
