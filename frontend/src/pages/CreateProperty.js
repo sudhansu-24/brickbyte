@@ -44,7 +44,7 @@ const CreateProperty = () => {
       throw new Error('Authentication required');
     }
 
-    const response = await fetch('http://localhost:3001/api/properties', {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/properties`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

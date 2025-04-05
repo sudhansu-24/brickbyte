@@ -26,7 +26,7 @@ const PropertyDetail = () => {
 
   const fetchPropertyDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/properties/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/properties/${id}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -76,7 +76,7 @@ const PropertyDetail = () => {
 
   const fetchUserShares = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/user/shares`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/shares`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -129,7 +129,7 @@ const PropertyDetail = () => {
       await tx.wait();
 
       // Record transaction in backend
-      const response = await fetch(`http://localhost:3001/api/properties/${id}/buy`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/properties/${id}/buy`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -217,7 +217,7 @@ const PropertyDetail = () => {
       console.log('Transaction confirmed');
 
       console.log('Recording transaction in backend...');
-      const response = await fetch(`http://localhost:3001/api/properties/${id}/sell`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/properties/${id}/sell`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

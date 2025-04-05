@@ -19,7 +19,7 @@ const Portfolio = () => {
 
   const fetchUserShares = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/user/shares`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/shares`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -61,7 +61,7 @@ const Portfolio = () => {
   const fetchTransactions = async () => {
     try {
       console.log('Fetching transactions...');
-      const response = await fetch(`http://localhost:3001/api/transactions`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/transactions`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
