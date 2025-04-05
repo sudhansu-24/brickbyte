@@ -19,7 +19,19 @@ function App() {
             <div className="flex justify-between h-16">
               <div className="flex items-center">
                 <Link to="/" className="text-xl font-bold text-indigo-600">
-                  BrickByte
+                <img
+                  src="/assets/logo1.png" 
+                  alt="BrickByte Logo" 
+                  width={140} 
+                  height={40} 
+                  style={{
+                    width: 140,
+                    height: 40,
+            }}
+            priority
+            className="invert dark:invert-100 transition-all duration-300"
+          />
+
                 </Link>
               </div>
               <div className="flex items-center space-x-4">
