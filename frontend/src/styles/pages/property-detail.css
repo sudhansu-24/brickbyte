@@ -1,0 +1,119 @@
+.property-detail {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.property-header {
+  margin-bottom: 2rem;
+}
+
+.property-header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.property-header .location {
+  color: #718096;
+  font-size: 1.1rem;
+}
+
+.property-image {
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.property-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.property-description {
+  color: #4a5568;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.property-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat {
+  background: #f7fafc;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.stat .label {
+  display: block;
+  color: #718096;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat .value {
+  display: block;
+  color: #2d3748;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.loading-valuation {
+  text-align: center;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  color: #6c757d;
+  font-size: 1.1rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+/* Responsive adjustments for ValuationCard */
+@media (max-width: 768px) {
+  .property-detail {
+    padding: 1rem;
+  }
+
+  .property-detail .bg-white {
+    padding: 1rem;
+  }
+  
+  .property-detail .text-3xl {
+    font-size: 1.5rem;
+  }
+  
+  .property-detail .grid-cols-3 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .property-header h1 {
+    font-size: 2rem;
+  }
+  
+  .stat {
+    padding: 0.75rem;
+  }
+} 

@@ -1,0 +1,16 @@
+/* Import base styles */
+@import './base.css';
+
+/* Import component styles */
+@import './components/navbar.css';
+@import './components/property-card.css';
+@import './components/transaction-form.css';
+@import './components/loading.css';
+
+/* Import page-specific styles */
+@import './pages/properties.css';
+@import './pages/property-detail.css';
+@import './pages/create-property.css';
+@import './pages/my-shares.css';
+@import './pages/login.css';
+@import './pages/register.css'; 
