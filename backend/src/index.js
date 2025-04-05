@@ -17,12 +17,14 @@ app.use(helmet());
 app.use(cors({
   origin: [
     'http://localhost:3000',  // Local development
-    'https://brickbyte.vercel.app',  // Your Vercel frontend
+    'https://brickbyte1.vercel.app',  // Your Vercel frontend
     process.env.FRONTEND_URL  // Environment variable for additional domains
   ].filter(Boolean),  // Remove any undefined values
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
 app.use(morgan('dev'));
 app.use(express.json());
