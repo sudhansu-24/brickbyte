@@ -85,68 +85,103 @@ const Properties = () => {
 
   if (loading) {
     return (
-      <div className="container">
-        <div className="loading">Loading properties...</div>
+      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
+            <p className="mt-4 text-lg text-gray-600">Loading properties...</p>
+          </div>
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="container">
-        <div className="error">
-          <h2>Error</h2>
-          <p>{error}</p>
-          <button className="button button-primary" onClick={fetchProperties}>
-            Try Again
-          </button>
+      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-red-50 border-l-4 border-red-400 p-4">
+            <div className="flex">
+              <div className="flex-shrink-0">
+                <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <p className="text-sm text-red-700">{error}</p>
+              </div>
+            </div>
+          </div>
+          <div className="mt-4 text-center">
+            <button
+              onClick={fetchProperties}
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Try Again
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="container">
-      <div className="properties-header">
-        <h1>Available Properties</h1>
-        <button className="button button-primary" onClick={() => navigate('/create-property')}>
-          Create Property
-        </button>
-      </div>
-
-      {properties.length === 0 ? (
-        <div className="no-properties">
-          <p>No properties available.</p>
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">Available Properties</h1>
+          <button
+            onClick={() => navigate('/create-property')}
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Create Property
+          </button>
         </div>
-      ) : (
-        <div className="properties-grid">
-          {properties.map((property) => (
-            <div key={property.id} className="property-card" onClick={() => navigate(`/properties/${property.id}`)}>
-              <img src={property.image_url} alt={property.name} className="property-image" />
-              <div className="property-info">
-                <div className="property-type">{property.type || 'Commercial'}</div>
-                <h3>{property.name}</h3>
-                <p className="location">{property.location}</p>
-                <div className="property-stats">
-                  <div className="stat">
-                    <span className="label">Token Price</span>
-                    <span className="value">{property.price_per_share} ETH</span>
+
+        {properties.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-lg text-gray-600">No properties available.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {properties.map((property) => (
+              <div
+                key={property.id}
+                onClick={() => navigate(`/properties/${property.id}`)}
+                className="bg-white overflow-hidden shadow rounded-lg hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+              >
+                <img
+                  src={property.image_url}
+                  alt={property.name}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-6">
+                  <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 mb-2">
+                    {property.type || 'Commercial'}
                   </div>
-                  <div className="stat">
-                    <span className="label">AI Projected ROI</span>
-                    <span className="value roi">
-                      {propertyValuations[property.id] ? 
-                        `+${propertyValuations[property.id].predicted_roi}%` : 
-                        `+${property.rental_yield}%`
-                      }
-                    </span>
+                  <h3 className="text-lg font-medium text-gray-900 mb-2">{property.name}</h3>
+                  <p className="text-gray-500 mb-4">{property.location}</p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-500">Token Price</p>
+                      <p className="text-lg font-semibold text-gray-900">{property.price_per_share} ETH</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">AI Projected ROI</p>
+                      <p className="text-lg font-semibold text-green-600">
+                        {propertyValuations[property.id] ? 
+                          `+${propertyValuations[property.id].predicted_roi}%` : 
+                          `+${property.rental_yield}%`
+                        }
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
