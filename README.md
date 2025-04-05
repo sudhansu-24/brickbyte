@@ -80,6 +80,8 @@ brickbyte/
 - npm or yarn
 - MetaMask or other Web3 wallet
 - Git
+- Python 3.8+ (for ML model)
+- Hardhat (for smart contract development)
 
 ### Installation
 
@@ -99,64 +101,122 @@ npm install
 cd ../backend
 npm install
 
-# Install contract dependencies
+# Install smart contract dependencies
 cd ../contracts
 npm install
+
+# Install ML model dependencies
+cd ../ml-model
+pip install -r requirements.txt
 ```
 
-3. Set up environment variables:
-```bash
-# Frontend
-cp frontend/.env.example frontend/.env
+### Environment Setup
 
-# Backend
-cp backend/.env.example backend/.env
+1. Create `.env` files in each directory:
 
-# Contracts
-cp contracts/.env.example contracts/.env
+Frontend (.env):
+```env
+REACT_APP_BACKEND_URL=http://localhost:3001
+REACT_APP_CONTRACT_ADDRESS=your_contract_address
 ```
 
-4. Start development servers:
+Backend (.env):
+```env
+PORT=3001
+DATABASE_URL=your_supabase_url
+JWT_SECRET=your_jwt_secret
+```
+
+Contracts (.env):
+```env
+PRIVATE_KEY=your_wallet_private_key
+SEPOLIA_RPC_URL=your_sepolia_rpc_url
+```
+
+2. Set up MetaMask:
+- Install MetaMask browser extension
+- Connect to Sepolia testnet
+- Import your test account using the private key from contracts/.env
+
+### Running the Application
+
+1. Start the ML model server:
 ```bash
-# Start frontend
+cd ml-model
+python scripts/valuation.py
+```
+
+2. Start the backend server:
+```bash
+cd backend
+npm run dev
+```
+
+3. Start the frontend development server:
+```bash
 cd frontend
-npm run dev
-
-# Start backend
-cd ../backend
-npm run dev
-
-# Deploy contracts (in a new terminal)
-cd ../contracts
-npx hardhat run scripts/deploy.ts --network sepolia
+npm start
 ```
 
-## 📝 Development Phases
+4. Deploy smart contracts (if needed):
+```bash
+cd contracts
+npx hardhat run scripts/deploy.js --network sepolia
+```
 
-### Phase 1: Core Features
-- [x] Deploy ERC-1155 Smart Contract
-- [x] Set up Supabase database
-- [x] Build basic marketplace UI
-- [x] Implement wallet connection
-- [x] Create property listing functionality
+The application will be available at:
+- Frontend: http://localhost:3000
+- Backend: http://localhost:3001
+- ML Model: http://localhost:5000
 
-### Phase 2: AI & Rental Distribution
-- [ ] Implement AI valuation model
-- [ ] Set up rental distribution smart contract
-- [ ] Add real-time price updates
-- [ ] Create analytics dashboard
+## 📝 Usage Guide
 
-### Phase 3: Full-Scale Deployment
-- [ ] Mainnet deployment
-- [ ] Governance mechanism
-- [ ] Liquidity pool implementation
+1. **User Registration**
+   - Navigate to http://localhost:3000/register
+   - Fill in your details and create an account
+   - Connect your MetaMask wallet
+
+2. **Property Listing**
+   - Log in to your account
+   - Navigate to "Create Property"
+   - Fill in property details and upload images
+   - Set initial share price and total shares
+
+3. **Trading**
+   - Browse available properties
+   - View AI-predicted ROI and property details
+   - Buy/sell shares using MetaMask
+
+4. **Portfolio Management**
+   - View your owned shares
+   - Track rental income
+   - Monitor property valuations
+
+## 🔧 Troubleshooting
+
+Common issues and solutions:
+
+1. **MetaMask Connection Issues**
+   - Ensure MetaMask is installed and unlocked
+   - Check if you're connected to Sepolia testnet
+   - Verify your account has sufficient test ETH
+
+2. **Backend Connection Errors**
+   - Check if backend server is running
+   - Verify environment variables are set correctly
+   - Check database connection
+
+3. **Smart Contract Deployment**
+   - Ensure you have sufficient test ETH
+   - Verify network configuration in hardhat.config.js
+   - Check contract compilation for errors
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
 ## 📄 License
@@ -170,5 +230,6 @@ For security concerns, please email security@brickbyte.com or create a security 
 ## 🙏 Acknowledgments
 
 - OpenZeppelin for smart contract templates
+- Chainlink for oracle services
 - Supabase for database infrastructure
-- Chainlink for oracle services 
+- The Ethereum community for development tools and resources 
