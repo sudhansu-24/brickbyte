@@ -6,10 +6,11 @@ BRICKBYTE is a decentralized platform that enables fractional ownership of real 
 
 - **Web3 Integration**: Connect with MetaMask and other Web3 wallets
 - **Fractional Property Ownership**: Buy and sell micro real estate shares as NFTs
-- **AI-Powered Valuation**: Dynamic property price predictions
+- **AI-Powered Valuation**: Dynamic property price predictions and ROI calculations
 - **Automated Rental Distribution**: Smart contract-based rental income distribution
 - **Real-time Trading**: Instant buy/sell of property shares
 - **Transparent Ownership**: On-chain ownership records and transaction history
+- **Portfolio Management**: Track your investments and AI-predicted returns
 
 ## 🛠 Tech Stack
 
@@ -20,12 +21,14 @@ BRICKBYTE is a decentralized platform that enables fractional ownership of real 
 - React Router
 - TailwindCSS
 - TypeScript
+- Vercel (Deployment)
 
 ### Backend
 - Node.js
 - Express.js
 - TypeScript
 - Supabase (PostgreSQL)
+- Render (Deployment)
 
 ### Smart Contracts
 - Solidity
@@ -35,6 +38,7 @@ BRICKBYTE is a decentralized platform that enables fractional ownership of real 
 
 ### AI/ML
 - Scikit-learn/TensorFlow (Local ML Model)
+- Render (Deployment)
 
 ### Blockchain
 - Ethereum (Sepolia Testnet for Development)
@@ -82,6 +86,8 @@ brickbyte/
 - Git
 - Python 3.8+ (for ML model)
 - Hardhat (for smart contract development)
+- Vercel account (for frontend deployment)
+- Render account (for backend and ML service deployment)
 
 ### Installation
 
@@ -116,15 +122,24 @@ pip install -r requirements.txt
 
 Frontend (.env):
 ```env
-REACT_APP_BACKEND_URL=http://localhost:3001
+REACT_APP_BACKEND_URL=https://brickbyte-backend.onrender.com
+REACT_APP_ML_API_URL=https://brickbyte-ml.onrender.com
 REACT_APP_CONTRACT_ADDRESS=your_contract_address
 ```
 
 Backend (.env):
 ```env
 PORT=3001
-DATABASE_URL=your_supabase_url
+SUPABASE_URL=your_supabase_url
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+SUPABASE_ANON_KEY=your_anon_key
 JWT_SECRET=your_jwt_secret
+FRONTEND_URL=https://brickbyte1.vercel.app
+```
+
+ML Service (.env):
+```env
+PORT=8000
 ```
 
 Contracts (.env):
@@ -133,12 +148,35 @@ PRIVATE_KEY=your_wallet_private_key
 SEPOLIA_RPC_URL=your_sepolia_rpc_url
 ```
 
-2. Set up MetaMask:
-- Install MetaMask browser extension
-- Connect to Sepolia testnet
-- Import your test account using the private key from contracts/.env
+### Deployment
 
-### Running the Application
+1. **Frontend Deployment (Vercel)**
+   - Push your code to GitHub
+   - Connect your repository to Vercel
+   - Set environment variables in Vercel dashboard
+   - Deploy
+
+2. **Backend Deployment (Render)**
+   - Push your code to GitHub
+   - Create a new Web Service on Render
+   - Connect your repository
+   - Set environment variables
+   - Deploy
+
+3. **ML Service Deployment (Render)**
+   - Push your code to GitHub
+   - Create a new Web Service on Render
+   - Set Python as the runtime
+   - Set environment variables
+   - Deploy
+
+4. **Smart Contract Deployment**
+```bash
+cd contracts
+npx hardhat run scripts/deploy.js --network sepolia
+```
+
+### Running Locally
 
 1. Start the ML model server:
 ```bash
@@ -158,21 +196,15 @@ cd frontend
 npm start
 ```
 
-4. Deploy smart contracts (if needed):
-```bash
-cd contracts
-npx hardhat run scripts/deploy.js --network sepolia
-```
-
 The application will be available at:
 - Frontend: http://localhost:3000
 - Backend: http://localhost:3001
-- ML Model: http://localhost:5000
+- ML Model: http://localhost:8000
 
 ## 📝 Usage Guide
 
 1. **User Registration**
-   - Navigate to http://localhost:3000/register
+   - Navigate to https://brickbyte1.vercel.app/register
    - Fill in your details and create an account
    - Connect your MetaMask wallet
 
@@ -190,23 +222,34 @@ The application will be available at:
 4. **Portfolio Management**
    - View your owned shares
    - Track rental income
-   - Monitor property valuations
+   - Monitor AI-predicted property valuations
 
 ## 🔧 Troubleshooting
 
 Common issues and solutions:
 
-1. **MetaMask Connection Issues**
+1. **CORS Issues**
+   - Ensure backend CORS configuration includes your frontend domain
+   - Check environment variables are set correctly
+   - Verify all services are properly deployed
+
+2. **MetaMask Connection Issues**
    - Ensure MetaMask is installed and unlocked
    - Check if you're connected to Sepolia testnet
    - Verify your account has sufficient test ETH
 
-2. **Backend Connection Errors**
+3. **Backend Connection Errors**
    - Check if backend server is running
    - Verify environment variables are set correctly
    - Check database connection
+   - Ensure CORS is properly configured
 
-3. **Smart Contract Deployment**
+4. **ML Service Issues**
+   - Verify ML service is running
+   - Check environment variables
+   - Ensure proper CORS configuration
+
+5. **Smart Contract Deployment**
    - Ensure you have sufficient test ETH
    - Verify network configuration in hardhat.config.js
    - Check contract compilation for errors
@@ -232,4 +275,5 @@ For security concerns, please email security@brickbyte.com or create a security 
 - OpenZeppelin for smart contract templates
 - Chainlink for oracle services
 - Supabase for database infrastructure
+- Vercel and Render for deployment infrastructure
 - The Ethereum community for development tools and resources 
