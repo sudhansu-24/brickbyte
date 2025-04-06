@@ -17,7 +17,7 @@ app.use(helmet());
 app.use(cors({
   origin: [
     'http://localhost:3000',  // Local development
-    'https://brickbyte1.vercel.app',  // Your Vercel frontend
+    'https://brickbyte.vercel.app',  // Vercel frontend
     process.env.FRONTEND_URL  // Environment variable for additional domains
   ].filter(Boolean),  // Remove any undefined values
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
