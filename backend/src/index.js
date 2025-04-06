@@ -13,7 +13,6 @@ const errorHandler = require('./middleware/errorHandler');
 const app = express();
 
 // Middleware
-app.use(helmet());
 app.use(cors({
   origin: [
     'http://localhost:3000',  // Local development
@@ -21,11 +20,56 @@ app.use(cors({
     process.env.FRONTEND_URL  // Environment variable for additional domains
   ].filter(Boolean),  // Remove any undefined values
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'X-Requested-With',
+    'Accept',
+    'Origin',
+    'Access-Control-Request-Method',
+    'Access-Control-Request-Headers',
+    'X-CSRF-Token',
+    'X-API-Key'
+  ],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
   credentials: true,
   preflightContinue: false,
-  optionsSuccessStatus: 204
+  optionsSuccessStatus: 204,
+  maxAge: 86400 // 24 hours
 }));
+
+// Configure helmet with more permissive settings
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'", "https://brickbyte-backend.onrender.com", "https://brickbyte.vercel.app"],
+      fontSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      mediaSrc: ["'self'"],
+      frameSrc: ["'none'"]
+    }
+  },
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  crossOriginOpenerPolicy: { policy: "same-origin" },
+  crossOriginEmbedderPolicy: false
+}));
+
+// Add error handling for CORS
+app.use((err, req, res, next) => {
+  if (err.name === 'CORS') {
+    console.error('CORS Error:', err);
+    return res.status(403).json({
+      error: 'CORS Error',
+      message: 'Not allowed by CORS'
+    });
+  }
+  next(err);
+});
+
 app.use(morgan('dev'));
 app.use(express.json());
 
