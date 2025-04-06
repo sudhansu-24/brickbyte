@@ -335,6 +335,19 @@ const PropertyDetail = () => {
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{userShares}</dd>
               </div>
             </dl>
+            <div className="flex justify-center mt-10">
+  <a
+    href="https://price-prediction-59gg.onrender.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="bg-gradient-to-t from-blue-900 to-blue-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 mb-4 rounded-lg shadow-md transition duration-300"
+  >
+    Try Price Prediction
+  </a>
+</div>
+
+
+
           </div>
         </div>
       </div>

@@ -37,6 +37,14 @@ function App() {
               <div className="flex items-center space-x-4">
                 {isAuthenticated ? (
                   <>
+                    <a
+  href="https://bb-v1.vercel.app/#insights"
+  className="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium"
+  target="_blank"  // optional: remove if you don't want a new tab
+  rel="noopener noreferrer" // for security if opening in new tab
+>
+  Market-Insights
+</a>
                     <Link to="/properties" className="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">
                       Properties
                     </Link>
@@ -88,4 +96,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
