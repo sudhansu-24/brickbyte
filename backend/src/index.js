@@ -27,13 +27,35 @@ app.use(cors({
     'Accept',
     'Origin',
     'Access-Control-Request-Method',
-    'Access-Control-Request-Headers'
+    'Access-Control-Request-Headers',
+    'X-CSRF-Token',
+    'X-API-Key'
   ],
   exposedHeaders: ['Content-Range', 'X-Content-Range'],
   credentials: true,
   preflightContinue: false,
   optionsSuccessStatus: 204,
   maxAge: 86400 // 24 hours
+}));
+
+// Configure helmet with more permissive settings
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'", "https://brickbyte-backend.onrender.com", "https://brickbyte.vercel.app"],
+      fontSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      mediaSrc: ["'self'"],
+      frameSrc: ["'none'"]
+    }
+  },
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  crossOriginOpenerPolicy: { policy: "same-origin" },
+  crossOriginEmbedderPolicy: false
 }));
 
 // Add error handling for CORS
@@ -48,7 +70,6 @@ app.use((err, req, res, next) => {
   next(err);
 });
 
-app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json());
 
