@@ -24,6 +24,7 @@ const Login = () => {
       setLoading(true);
       setError('');
 
+      console.log('Attempting login with:', formData);
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
@@ -33,19 +34,28 @@ const Login = () => {
       });
 
       const data = await response.json();
+      console.log('Login response:', data);
 
       if (!response.ok) {
         throw new Error(data.error || 'Login failed');
       }
 
       if (data.token) {
+        console.log('Setting token and user data');
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify({
           id: data.user.id,
           email: data.user.email,
           walletAddress: data.user.walletAddress
         }));
-        navigate('/properties');
+        console.log('Navigating to properties page');
+        setTimeout(() => {
+          console.log('Navigating to /properties');
+          window.location.href = '/properties';
+        }, 0);
+      } else {
+        console.error('No token received in response');
+        throw new Error('Login failed: No token received');
       }
     } catch (err) {
       setError(err.message || 'Login failed');
