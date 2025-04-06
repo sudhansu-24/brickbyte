@@ -167,7 +167,7 @@ const CreateProperty = () => {
       <div className="max-w-3xl mx-auto">
         <div className="bg-white shadow sm:rounded-lg">
           <div className="px-4 py-5 sm:p-6">
-            <h1 className="text-3xl font-bold text-gray-900 mb-6">List a New Property</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-8">List a New Property</h1>
             
             {error && (
               <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
@@ -184,10 +184,10 @@ const CreateProperty = () => {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                     Property Name
                   </label>
                   <input
@@ -197,12 +197,13 @@ const CreateProperty = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-full rounded-md border-2 border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
 
+                {/* Location input */}
                 <div>
-                  <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
                     Location
                   </label>
                   <input
@@ -212,12 +213,13 @@ const CreateProperty = () => {
                     value={formData.location}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-full rounded-md border-2 border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
 
+                {/* Property Type select */}
                 <div>
-                  <label htmlFor="type" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-2">
                     Property Type
                   </label>
                   <select
@@ -226,15 +228,16 @@ const CreateProperty = () => {
                     value={formData.type}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-full rounded-md border-2 border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   >
                     <option value="Commercial">Commercial</option>
                     <option value="Residential">Residential</option>
                   </select>
                 </div>
 
+                {/* Image URL input */}
                 <div>
-                  <label htmlFor="imageUri" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="imageUri" className="block text-sm font-medium text-gray-700 mb-2">
                     Image URL
                   </label>
                   <input
@@ -244,13 +247,13 @@ const CreateProperty = () => {
                     value={formData.imageUri}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-full rounded-md border-2 border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+              <div className="mt-8">
+                <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
                   Description
                 </label>
                 <textarea
@@ -260,13 +263,13 @@ const CreateProperty = () => {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md border-2 border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
               </div>
 
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 mt-8">
                 <div>
-                  <label htmlFor="totalShares" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="totalShares" className="block text-sm font-medium text-gray-700 mb-2">
                     Total Shares
                   </label>
                   <input
@@ -277,12 +280,13 @@ const CreateProperty = () => {
                     onChange={handleChange}
                     min="1"
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-full rounded-md border-2 border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
 
+                {/* Update remaining numeric inputs with similar styling */}
                 <div>
-                  <label htmlFor="pricePerShare" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="pricePerShare" className="block text-sm font-medium text-gray-700 mb-2">
                     Price per Share (ETH)
                   </label>
                   <input
@@ -294,12 +298,12 @@ const CreateProperty = () => {
                     step="0.0001"
                     min="0.0001"
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-full rounded-md border-2 border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="rentalYield" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="rentalYield" className="block text-sm font-medium text-gray-700 mb-2">
                     Rental Yield (%)
                   </label>
                   <input
@@ -311,16 +315,16 @@ const CreateProperty = () => {
                     min="0"
                     max="100"
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-full rounded-md border-2 border-black px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-end">
+              <div className="flex justify-end mt-8">
                 <button
                   type="submit"
                   disabled={loading || isTransactionPending}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading || isTransactionPending ? (
                     <>
@@ -343,4 +347,4 @@ const CreateProperty = () => {
   );
 };
 
-export default CreateProperty; 
+export default CreateProperty;
