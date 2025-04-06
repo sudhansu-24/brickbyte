@@ -187,7 +187,7 @@ python scripts/valuation.py
 2. Start the backend server:
 ```bash
 cd backend
-npm run dev
+npm start
 ```
 
 3. Start the frontend development server:
@@ -196,7 +196,7 @@ cd frontend
 npm start
 ```
 
-The application will be available at:
+The application will be available locally at:
 - Frontend: http://localhost:3000
 - Backend: http://localhost:3001
 - ML Model: http://localhost:8000
@@ -204,7 +204,7 @@ The application will be available at:
 ## 📝 Usage Guide
 
 1. **User Registration**
-   - Navigate to https://brickbyte1.vercel.app/register
+   - Navigate to https://brickbyte.vercel.app/register
    - Fill in your details and create an account
    - Connect your MetaMask wallet
 
