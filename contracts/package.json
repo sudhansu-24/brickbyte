@@ -12,6 +12,7 @@
   "dependencies": {
     "@chainlink/contracts": "^0.8.0",
     "@openzeppelin/contracts": "^4.9.3",
+    "brickbyte-contracts": "file:",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
