@@ -35,8 +35,8 @@ export default function DashboardPage() {
         <p className="text-muted-foreground">Welcome back, {user?.email}</p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card>
+      <div className="grid gap-40 md:grid-cols-2 lg:grid-cols-2 flex justify-center ">
+        <Card className='border-md border-gray-200 dark:border-gray-400'>
           <CardHeader>
             <CardTitle>Wallet Address</CardTitle>
           </CardHeader>
@@ -51,7 +51,7 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className='border-md border-gray-200 dark:border-gray-400'>
           <CardHeader>
             <CardTitle>Recent Activity</CardTitle>
           </CardHeader>
@@ -60,16 +60,7 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Account Settings</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Button variant="outline" onClick={() => router.push('/profile')}>
-              Manage Profile
-            </Button>
-          </CardContent>
-        </Card>
+        
       </div>
     </div>
   );
