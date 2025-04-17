@@ -6,11 +6,13 @@ import { useAuth } from "@/context/auth-context"
 import { useToast } from "@/hooks/use-toast"
 import { ArrowRight } from "lucide-react"
 import { useEffect, useState } from "react"
+import { useTheme } from "next-themes"
 
 export default function Hero() {
   const router = useRouter()
   const { isAuthenticated } = useAuth()
   const { toast } = useToast()
+  const { theme } = useTheme()
   const [SplineComponent, setSplineComponent] = useState<any>(null)
 
   useEffect(() => {
@@ -29,6 +31,11 @@ export default function Hero() {
     }
     router.push("/properties")
   }
+
+  // Determine which Spline scene to use based on theme
+  const splineScene = theme === "dark" 
+    ? "https://prod.spline.design/iFxzddLHhx6KA0iB/scene.splinecode"
+    : "https://prod.spline.design/Id21W5YWAPXfvdB3/scene.splinecode"
 
   return (
     <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48">
@@ -58,7 +65,7 @@ export default function Hero() {
           </div>
           <div className="relative h-[400px] w-full overflow-hidden rounded-xl">
             {SplineComponent ? (
-              <SplineComponent scene="https://prod.spline.design/u6UQfoGOao41SCFx/scene.splinecode" />
+              <SplineComponent scene={splineScene} />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm">
                 <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
