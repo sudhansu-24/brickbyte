@@ -51,11 +51,13 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+      <Card className="w-full max-w-md bg-white dark:bg-gray-900 text-slate-900 dark:text-gray-100">
         <CardHeader>
           <CardTitle>Login</CardTitle>
-          <CardDescription>Enter your credentials to access your account</CardDescription>
+          <CardDescription className="text-gray-500 dark:text-gray-400">
+            Enter your credentials to access your account
+          </CardDescription>
         </CardHeader>
         <CardContent>
           {error && (
@@ -89,9 +91,9 @@ export default function LoginPage() {
             </Button>
           </form>
           <div className="mt-4 text-center">
-            <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
-              <Link href="/register" className="text-blue-600 hover:underline">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Don&apos;t have an account?{' '}
+              <Link href="/register" className="text-blue-600 dark:text-blue-400 hover:underline">
                 Register
               </Link>
             </p>
@@ -100,4 +102,4 @@ export default function LoginPage() {
       </Card>
     </div>
   );
-} 
+}

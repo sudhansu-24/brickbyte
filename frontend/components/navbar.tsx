@@ -77,17 +77,13 @@ export default function Navbar() {
         <Link href="/" className="flex items-center space-x-2">
           <span>
           <img
-                    src="/assets/logo1.png" 
-                    alt="BrickByte Logo" 
-                    width={140} 
-                    height={40} 
-                    style={{
-                      width: 140,
-                      height: 40,
-                    }}
-                    priority
-                    className="invert dark:invert-100 transition-all duration-300"
-                  />
+  src="/assets/logo1.png"
+  alt="BrickByte Logo"
+  width={140}
+  height={40}
+  className="invert dark:invert-0 transition-all duration-300"
+/>
+
           </span>
         </Link>
 
