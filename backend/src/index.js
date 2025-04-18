@@ -17,6 +17,7 @@ app.use(cors({
   origin: [
     'http://localhost:3000',  // Local development
     'https://brickbyte.vercel.app',  // Vercel frontend
+    'https://brickbytev24.vercel.app', // New Vercel domain
     process.env.FRONTEND_URL  // Environment variable for additional domains
   ].filter(Boolean),  // Remove any undefined values
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -46,7 +47,7 @@ app.use(helmet({
       scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "https://brickbyte-backend.onrender.com", "https://brickbyte.vercel.app"],
+      connectSrc: ["'self'", "https://brickbyte-backend.onrender.com", "https://brickbyte.vercel.app", "https://brickbytev24.vercel.app"],
       fontSrc: ["'self'"],
       objectSrc: ["'none'"],
       mediaSrc: ["'self'"],
