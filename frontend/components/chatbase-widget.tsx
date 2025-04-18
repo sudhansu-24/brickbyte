@@ -18,28 +18,14 @@ export default function ChatbaseWidget() {
     // Only run this code on the client side
     if (typeof window === 'undefined') return;
     
-    // Initialize chatbase if not already initialized
-    if (!window.chatbase) {
-      // Create a simple queue implementation
-      const queue: any[] = [];
-      
-      // Define the chatbase function
-      const chatbaseFn = (...args: any[]) => {
-        queue.push(args);
-      };
-      
-      // Add the queue property
-      chatbaseFn.q = queue;
-      
-      // Assign to window
-      window.chatbase = chatbaseFn;
-    }
-    
     // Function to load the script
-    const onLoad = () => {
+    const loadScript = () => {
+      // Check if script already exists
+      if (document.getElementById("chatbase-script")) return;
+      
       const script = document.createElement("script")
       script.src = "https://www.chatbase.co/embed.min.js"
-      script.id = "nyfVnLT5DLUJBJWW0qtWO"
+      script.id = "chatbase-script"
       script.setAttribute("data-domain", "www.chatbase.co")
       document.body.appendChild(script)
       
@@ -53,17 +39,17 @@ export default function ChatbaseWidget() {
     
     // Load the script when the document is ready
     if (document.readyState === "complete") {
-      onLoad()
+      loadScript()
     } else {
-      window.addEventListener("load", onLoad)
+      window.addEventListener("load", loadScript)
     }
     
     // Cleanup function
     return () => {
-      window.removeEventListener("load", onLoad)
+      window.removeEventListener("load", loadScript)
       window.removeEventListener("chatbase:stateChange", () => {})
       // Remove the script if it exists
-      const script = document.getElementById("nyfVnLT5DLUJBJWW0qtWO")
+      const script = document.getElementById("chatbase-script")
       if (script && script.parentNode) {
         script.parentNode.removeChild(script)
       }
@@ -71,7 +57,8 @@ export default function ChatbaseWidget() {
   }, [])
 
   const toggleChat = () => {
-    if (window.chatbase) {
+    // Use the global chatbase function if available
+    if (typeof window !== 'undefined' && window.chatbase) {
       window.chatbase("toggle")
     }
   }

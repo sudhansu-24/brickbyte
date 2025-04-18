@@ -129,7 +129,8 @@ export const reducer = (state: State, action: Action): State => {
   }
 }
 
-const listeners: Array<(state: State) => void> = []
+// Use a Set instead of an Array for listeners to avoid potential issues
+const listeners = new Set<(state: State) => void>()
 
 let memoryState: State = { toasts: [] }
 
@@ -175,12 +176,12 @@ function useToast() {
   const [state, setState] = React.useState<State>(memoryState)
 
   React.useEffect(() => {
-    listeners.push(setState)
+    // Only run on client side
+    if (typeof window === 'undefined') return;
+    
+    listeners.add(setState)
     return () => {
-      const index = listeners.indexOf(setState)
-      if (index > -1) {
-        listeners.splice(index, 1)
-      }
+      listeners.delete(setState)
     }
   }, [state])
 
