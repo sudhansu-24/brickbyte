@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "rootDirectory": "frontend",
   "buildCommand": "npm install && npm run build",
   "outputDirectory": ".next",
   "installCommand": "npm install",
