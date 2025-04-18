@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
+
 const nextConfig = {
   webpack: (config) => {
     config.resolve.fallback = {
@@ -6,10 +8,14 @@ const nextConfig = {
       fs: false,
       path: false,
     };
+    
+    // Add path alias configuration
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, './'),
+    };
+    
     return config;
-  },
-  experimental: {
-    appDir: true,
   },
 }
 
