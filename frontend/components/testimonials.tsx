@@ -141,7 +141,7 @@ export default function Testimonials() {
                           </Avatar>
                         </div>
                         <div className="flex mb-4">
-                          {[...Array(5)].map((_, i) => (
+                          {Array.from({ length: 5 }, (_, i) => (
                             <Star
                               key={i}
                               className={cn(

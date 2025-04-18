@@ -15,23 +15,24 @@ export default function ChatbaseWidget() {
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
+    // Only run this code on the client side
+    if (typeof window === 'undefined') return;
+    
     // Initialize chatbase if not already initialized
-    if (!window.chatbase || window.chatbase("getState") !== "initialized") {
-      window.chatbase = (...args: any[]) => {
-        if (!window.chatbase.q) {
-          window.chatbase.q = []
-        }
-        window.chatbase.q.push(args)
-      }
+    if (!window.chatbase) {
+      // Create a simple queue implementation
+      const queue: any[] = [];
       
-      window.chatbase = new Proxy(window.chatbase, {
-        get(target, prop) {
-          if (prop === "q") {
-            return target.q
-          }
-          return (...args: any[]) => target(prop, ...args)
-        }
-      })
+      // Define the chatbase function
+      const chatbaseFn = (...args: any[]) => {
+        queue.push(args);
+      };
+      
+      // Add the queue property
+      chatbaseFn.q = queue;
+      
+      // Assign to window
+      window.chatbase = chatbaseFn;
     }
     
     // Function to load the script

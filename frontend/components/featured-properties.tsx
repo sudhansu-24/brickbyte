@@ -132,7 +132,7 @@ export function FeaturedProperties() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[...Array(4)].map((_, index) => (
+            {Array.from({ length: 4 }, (_, index) => (
               <PropertySkeleton key={index} />
             ))}
           </div>
