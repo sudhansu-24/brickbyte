@@ -77,6 +77,12 @@ export default function MarketInsights() {
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Our AI analyzes market trends and property data to provide you with the most accurate investment insights.
           </p>
+          <a href="https://graph-model.onrender.com" target="_blank" rel="noopener noreferrer">
+            <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">
+              Future Trends
+            </button>
+          </a>
+
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -211,9 +217,8 @@ export default function MarketInsights() {
                       </div>
                       <div className="flex flex-col items-end">
                         <span
-                          className={`font-semibold flex items-center ${
-                            trend.isPositive ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
-                          }`}
+                          className={`font-semibold flex items-center ${trend.isPositive ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
+                            }`}
                         >
                           {trend.change}
                           {trend.isPositive ? (

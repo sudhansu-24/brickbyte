@@ -5,6 +5,7 @@ import Portfolio from "@/components/portfolio"
 import Trading from "@/components/trading"
 import StakingGovernance from "@/components/staking-governance"
 import Testimonials from "@/components/testimonials"
+import ChatbaseWidget from "@/components/chatbase-widget"
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Trading />
       <StakingGovernance />
       <Testimonials />
+      <ChatbaseWidget />
     </main>
   )
 }

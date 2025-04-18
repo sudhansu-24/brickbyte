@@ -90,7 +90,7 @@ export default function Portfolio() {
       
       console.log('Sending valuation request for property:', property.id, propertyData);
       
-      const response = await fetch('http://localhost:8000/api/valuation', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_ML_API_URL}/api/valuation`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

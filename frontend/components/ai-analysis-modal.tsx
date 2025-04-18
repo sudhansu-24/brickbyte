@@ -63,7 +63,7 @@ export function AIAnalysisModal({ propertyId, propertyData }: AIAnalysisModalPro
         address: propertyData.location
       };
       
-      const response = await fetch('http://localhost:8000/api/valuation', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_ML_API_URL}/api/valuation`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

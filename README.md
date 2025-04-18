@@ -198,8 +198,8 @@ npm run dev
 
 The application will be available locally at:
 - Frontend: http://localhost:3000
-- Backend: http://localhost:3001
-- ML Model: http://localhost:8000
+- Backend: https://brickbyte-backend.onrender.com
+- ML Model: https://brickbyte-ml.onrender.com
 
 ## 📝 Usage Guide
 

@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/.next",
+  "installCommand": "cd frontend && npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://brickbyte-backend.onrender.com",
+    "NEXT_PUBLIC_ML_API_URL": "https://brickbyte-ml.onrender.com",
+    "NEXT_PUBLIC_SEPOLIA_RPC_URL": "https://eth-sepolia.g.alchemy.com/v2/dPdxiAllAvaC0IhgPRAumQ4-03GrRa88",
+    "NEXT_PUBLIC_CONTRACT_ADDRESS": "0xb39c11D2F62f3fADd1d1f5D3935e1D1b3e6D8FAb",
+    "NEXT_PUBLIC_SUPABASE_URL": "https://sfcexboguumqecgcjfmj.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNmY2V4Ym9ndXVtcWVjZ2NqZm1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MzE2MjMsImV4cCI6MjA1OTEwNzYyM30.AhGzCuvoHw_zoGccd9QVZOBUKCtMUpzQLJ7YC8PT7Co"
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-Requested-With, Content-Type, Authorization"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://brickbyte-backend.onrender.com/api/:path*"
+    }
+  ]
+} 
