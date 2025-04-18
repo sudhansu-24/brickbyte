@@ -40,7 +40,7 @@ interface Valuation {
 }
 
 export default function PropertiesPage() {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [propertyValuations, setPropertyValuations] = useState<Record<string, Valuation>>({});
   const { data: properties, isLoading, error, mutate } = useProperties();
 

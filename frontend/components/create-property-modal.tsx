@@ -23,7 +23,11 @@ import { Plus } from 'lucide-react';
 
 const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
 
-export function CreatePropertyModal() {
+interface CreatePropertyModalProps {
+  onPropertyCreated?: () => void;
+}
+
+export function CreatePropertyModal({ onPropertyCreated }: CreatePropertyModalProps) {
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isTransactionPending, setIsTransactionPending] = useState(false);
@@ -154,10 +158,12 @@ export function CreatePropertyModal() {
       });
 
       // Refresh the properties list
-      if (mutate) {
+      if (onPropertyCreated) {
+        await onPropertyCreated();
+      } else if (mutate) {
         await mutate();
       } else {
-        console.error('Mutate function is not available');
+        console.error('No refresh function available');
       }
       
       // Close the modal

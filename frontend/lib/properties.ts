@@ -13,6 +13,7 @@ export interface Property {
   type: 'Commercial' | 'Residential';
   owner_id: string;
   contract_address: string;
+  blockchain_property_id: string;
   created_at: string;
   updated_at: string;
   profiles?: {

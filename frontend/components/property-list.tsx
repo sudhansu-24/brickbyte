@@ -1,4 +1,4 @@
-import { Property } from '@/types/property';
+import { Property } from '@/lib/properties';
 import { PropertyCard } from './property-card';
 import { PropertySkeleton } from './property-skeleton';
 
