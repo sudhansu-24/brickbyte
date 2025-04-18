@@ -105,7 +105,7 @@ export default function PropertiesPage() {
       <div className="container mx-auto py-8">
         <h1 className="text-3xl font-bold mb-8">Available Properties</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {Array.from({ length: 8 }, (_, index) => (
+          {[...Array(8)].map((_, index) => (
             <PropertySkeleton key={index} />
           ))}
         </div>

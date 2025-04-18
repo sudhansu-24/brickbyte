@@ -84,4 +84,3 @@ typechain-types/
 # Next.js
 .next/
 out/ 
-.vercel

@@ -9,14 +9,11 @@ interface PropertyListProps {
 
 export function PropertyList({ properties, isLoading = false }: PropertyListProps) {
   if (isLoading) {
-    // Create a fixed array of 6 items for skeletons
-    const skeletonItems = Array.from({ length: 6 }, (_, index) => (
-      <PropertySkeleton key={index} />
-    ));
-    
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {skeletonItems}
+        {[...Array(6)].map((_, index) => (
+          <PropertySkeleton key={index} />
+        ))}
       </div>
     );
   }

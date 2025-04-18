@@ -15,17 +15,30 @@ export default function ChatbaseWidget() {
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
-    // Only run this code on the client side
-    if (typeof window === 'undefined') return;
+    // Initialize chatbase if not already initialized
+    if (!window.chatbase || window.chatbase("getState") !== "initialized") {
+      window.chatbase = (...args: any[]) => {
+        if (!window.chatbase.q) {
+          window.chatbase.q = []
+        }
+        window.chatbase.q.push(args)
+      }
+      
+      window.chatbase = new Proxy(window.chatbase, {
+        get(target, prop) {
+          if (prop === "q") {
+            return target.q
+          }
+          return (...args: any[]) => target(prop, ...args)
+        }
+      })
+    }
     
     // Function to load the script
-    const loadScript = () => {
-      // Check if script already exists
-      if (document.getElementById("chatbase-script")) return;
-      
+    const onLoad = () => {
       const script = document.createElement("script")
       script.src = "https://www.chatbase.co/embed.min.js"
-      script.id = "chatbase-script"
+      script.id = "nyfVnLT5DLUJBJWW0qtWO"
       script.setAttribute("data-domain", "www.chatbase.co")
       document.body.appendChild(script)
       
@@ -39,17 +52,17 @@ export default function ChatbaseWidget() {
     
     // Load the script when the document is ready
     if (document.readyState === "complete") {
-      loadScript()
+      onLoad()
     } else {
-      window.addEventListener("load", loadScript)
+      window.addEventListener("load", onLoad)
     }
     
     // Cleanup function
     return () => {
-      window.removeEventListener("load", loadScript)
+      window.removeEventListener("load", onLoad)
       window.removeEventListener("chatbase:stateChange", () => {})
       // Remove the script if it exists
-      const script = document.getElementById("chatbase-script")
+      const script = document.getElementById("nyfVnLT5DLUJBJWW0qtWO")
       if (script && script.parentNode) {
         script.parentNode.removeChild(script)
       }
@@ -57,8 +70,7 @@ export default function ChatbaseWidget() {
   }, [])
 
   const toggleChat = () => {
-    // Use the global chatbase function if available
-    if (typeof window !== 'undefined' && window.chatbase) {
+    if (window.chatbase) {
       window.chatbase("toggle")
     }
   }
