@@ -309,7 +309,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔒 Security
 
-For security concerns, please email brickbyte24@gmail.com or create a security advisory on GitHub.
+For security concerns, please email at brickbyte24@gmail.com or create a security advisory on GitHub.
 
 ## 🙏 Acknowledgments
 
