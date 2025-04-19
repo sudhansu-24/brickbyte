@@ -1,8 +1,12 @@
+# 🏠 BRICKBYTE - AI/Blockchain Based Micro Real Estate Investment Platform
+
 <div align="center">
-   # 🏠 BRICKBYTE - AI/Blockchain Based Micro Real Estate Investment Platform
-   ![Landing Page](frontend/screenshots/brick-banner.png)
-   [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://brickbyte.vercel.app)
-   [![Demo Video](https://img.shields.io/badge/Watch%20Demo-Video-red?style=for-the-badge&logo=youtube)](https://youtu.be/jYuMzdXD75I)
+  
+![Landing Page](frontend/screenshots/brick-banner.png)
+
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://brickbyte.vercel.app)
+[![Demo Video](https://img.shields.io/badge/Watch%20Demo-Video-red?style=for-the-badge&logo=youtube)](https://youtu.be/jYuMzdXD75I)
+
 </div>
 
 BRICKBYTE is a decentralized platform that enables fractional ownership of real estate properties through NFTs, powered by AI valuation and automated rental distribution.
@@ -21,21 +25,24 @@ BRICKBYTE is a decentralized platform that enables fractional ownership of real 
 
 ## 🎨 UI Screenshots
 
-### 1. Welcome to Brickbyte 
-![Landing Page](frontend/screenshots/brick1.png)
+<div align="center">
 
-### 2. Properties
-![Featured Properties](frontend/screenshots/brick2.png)
+### 1. Welcome to Brickbyte 
+![Welcome to Brickbyte](frontend/screenshots/brick1.png)
+
+### 2. Properties Marketplace
+![Properties Marketplace](frontend/screenshots/brick2.png)
 
 ### 3. AI Market Insights
-![Graphs](frontend/screenshots/brick3.png)
+![AI Market Insights](frontend/screenshots/brick3.png)
 
-### 3. Market Trends
-![Rental Yeild](frontend/screenshots/brick4.png)
+### 4. Market Trends Analysis
+![Market Trends Analysis](frontend/screenshots/brick4.png)
 
-### 3. Auction/Staking
-![Staking & Governance](frontend/screenshots/brick5.png)
+### 5. Auction & Staking Platform
+![Auction & Staking Platform](frontend/screenshots/brick5.png)
 
+</div>
 
 ## 🛠 Tech Stack
 
