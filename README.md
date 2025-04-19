@@ -1,22 +1,12 @@
-# 🏠 BRICKBYTE - AI-Based Micro Real Estate Marketplace
-
 <div align="center">
-  <img src="frontend/screenshots/1brikc.jpg" alt="BrickByte Homepage" width="600" />
-  <p><em>BrickByte - Fractional Real Estate Investment Platform</em></p>
+   # 🏠 BRICKBYTE - AI/Blockchain Based Micro Real Estate Investment Platform
+   ![Landing Page](frontend/screenshots/brick-banner.png)
+   [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://brickbyte.vercel.app)
+   [![Demo Video](https://img.shields.io/badge/Watch%20Demo-Video-red?style=for-the-badge&logo=youtube)](https://youtu.be/jYuMzdXD75I)
 </div>
-
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://brickbytev24.vercel.app)
-[![Demo Video](https://img.shields.io/badge/Watch%20Demo-Video-red?style=for-the-badge&logo=youtube)](https://youtu.be/jYuMzdXD75I)
 
 BRICKBYTE is a decentralized platform that enables fractional ownership of real estate properties through NFTs, powered by AI valuation and automated rental distribution.
 
-## 📸 Screenshots
-
-<div align="center">
-  <img src="frontend/screenshots/1brikc.jpg" alt="BrickByte Homepage" width="400" />
-  <img src="frontend/screenshots/2brick.jpg" alt="BrickByte Properties" width="400" />
-  <img src="frontend/screenshots/3brick.jpg" alt="BrickByte Portfolio" width="400" />
-</div>
 
 ## 🌟 Features
 
@@ -28,6 +18,24 @@ BRICKBYTE is a decentralized platform that enables fractional ownership of real 
 - **Transparent Ownership**: On-chain ownership records and transaction history
 - **Portfolio Management**: Track your investments and AI-predicted returns
 - **Interactive Chatbot**: AI-powered assistant for property inquiries and support
+
+## 🎨 UI Screenshots
+
+### 1. Welcome to Brickbyte 
+![Landing Page](frontend/screenshots/brick1.png)
+
+### 2. Properties
+![Featured Properties](frontend/screenshots/brick2.png)
+
+### 3. AI Market Insights
+![Graphs](frontend/screenshots/brick3.png)
+
+### 3. Market Trends
+![Rental Yeild](frontend/screenshots/brick4.png)
+
+### 3. Auction/Staking
+![Staking & Governance](frontend/screenshots/brick5.png)
+
 
 ## 🛠 Tech Stack
 
@@ -154,7 +162,7 @@ SUPABASE_URL=your_supabase_url
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 SUPABASE_ANON_KEY=your_anon_key
 JWT_SECRET=your_jwt_secret
-FRONTEND_URL=https://brickbytev24.vercel.app
+FRONTEND_URL=https://brickbyte.vercel.app
 ```
 
 ML Service (.env):
@@ -224,13 +232,13 @@ The application will be available locally at:
 
 ## 🌐 Live Demo
 
-- **Deployed Application**: [https://brickbytev24.vercel.app](https://brickbytev24.vercel.app)
+- **Deployed Application**: [https://brickbyte.vercel.app](https://brickbyte.vercel.app)
 - **Demo Video**: [https://youtu.be/jYuMzdXD75I](https://youtu.be/jYuMzdXD75I)
 
 ## 📝 Usage Guide
 
 1. **User Registration**
-   - Navigate to https://brickbytev24.vercel.app/register
+   - Navigate to https://brickbyte.vercel.app/register
    - Fill in your details and create an account
    - Connect your MetaMask wallet
 
@@ -307,9 +315,9 @@ For security concerns, please email security@brickbyte.com or create a security 
 ---
 
 <div align="center">
-  <p>Built with ❤️ by Sudhansu Kumar</p>
+  <p>Built with ❤️ by My Team</p>
   <p>
     <a href="https://github.com/sudhansu-24">GitHub</a> •
-    <a href="https://linkedin.com/in/sudhansu-kumar-24">LinkedIn</a>
+    <a href="https://www.linkedin.com/in/sudhansushekhar">LinkedIn</a>
   </p>
 </div> 
