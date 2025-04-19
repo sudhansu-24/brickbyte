@@ -156,7 +156,7 @@ Frontend (.env.local):
 ```env
 NEXT_PUBLIC_API_URL=https://brickbyte-backend.onrender.com
 NEXT_PUBLIC_ML_API_URL=https://brickbyte-ml.onrender.com
-NEXT_PUBLIC_SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/dPdxiAllAvaC0IhgPRAumQ4-03GrRa88
+NEXT_PUBLIC_SEPOLIA_RPC_URL=YOUR_RPC_URL_PROVIDER
 NEXT_PUBLIC_CONTRACT_ADDRESS=0xb39c11D2F62f3fADd1d1f5D3935e1D1b3e6D8FAb
 NEXT_PUBLIC_SUPABASE_URL=https://sfcexboguumqecgcjfmj.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -309,7 +309,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔒 Security
 
-For security concerns, please email security@brickbyte.com or create a security advisory on GitHub.
+For security concerns, please email brickbyte24@gmail.com or create a security advisory on GitHub.
 
 ## 🙏 Acknowledgments
 
