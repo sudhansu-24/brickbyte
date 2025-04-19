@@ -1,6 +1,22 @@
 # 🏠 BRICKBYTE - AI-Based Micro Real Estate Marketplace
 
+<div align="center">
+  <img src="frontend/screenshots/1brikc.jpg" alt="BrickByte Homepage" width="600" />
+  <p><em>BrickByte - Fractional Real Estate Investment Platform</em></p>
+</div>
+
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://brickbytev24.vercel.app)
+[![Demo Video](https://img.shields.io/badge/Watch%20Demo-Video-red?style=for-the-badge&logo=youtube)](https://youtu.be/jYuMzdXD75I)
+
 BRICKBYTE is a decentralized platform that enables fractional ownership of real estate properties through NFTs, powered by AI valuation and automated rental distribution.
+
+## 📸 Screenshots
+
+<div align="center">
+  <img src="frontend/screenshots/1brikc.jpg" alt="BrickByte Homepage" width="400" />
+  <img src="frontend/screenshots/2brick.jpg" alt="BrickByte Properties" width="400" />
+  <img src="frontend/screenshots/3brick.jpg" alt="BrickByte Portfolio" width="400" />
+</div>
 
 ## 🌟 Features
 
@@ -11,6 +27,7 @@ BRICKBYTE is a decentralized platform that enables fractional ownership of real 
 - **Real-time Trading**: Instant buy/sell of property shares
 - **Transparent Ownership**: On-chain ownership records and transaction history
 - **Portfolio Management**: Track your investments and AI-predicted returns
+- **Interactive Chatbot**: AI-powered assistant for property inquiries and support
 
 ## 🛠 Tech Stack
 
@@ -122,9 +139,12 @@ pip install -r requirements.txt
 
 Frontend (.env.local):
 ```env
-NEXT_PUBLIC_BACKEND_URL=https://brickbyte-backend.onrender.com
+NEXT_PUBLIC_API_URL=https://brickbyte-backend.onrender.com
 NEXT_PUBLIC_ML_API_URL=https://brickbyte-ml.onrender.com
-NEXT_PUBLIC_CONTRACT_ADDRESS=your_contract_address
+NEXT_PUBLIC_SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/dPdxiAllAvaC0IhgPRAumQ4-03GrRa88
+NEXT_PUBLIC_CONTRACT_ADDRESS=0xb39c11D2F62f3fADd1d1f5D3935e1D1b3e6D8FAb
+NEXT_PUBLIC_SUPABASE_URL=https://sfcexboguumqecgcjfmj.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
 Backend (.env):
@@ -134,7 +154,7 @@ SUPABASE_URL=your_supabase_url
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 SUPABASE_ANON_KEY=your_anon_key
 JWT_SECRET=your_jwt_secret
-FRONTEND_URL=https://brickbyte.vercel.app
+FRONTEND_URL=https://brickbytev24.vercel.app
 ```
 
 ML Service (.env):
@@ -153,6 +173,7 @@ SEPOLIA_RPC_URL=your_sepolia_rpc_url
 1. **Frontend Deployment (Vercel)**
    - Push your code to GitHub
    - Connect your repository to Vercel
+   - Set the root directory to `frontend`
    - Set environment variables in Vercel dashboard
    - Deploy
 
@@ -201,10 +222,15 @@ The application will be available locally at:
 - Backend: https://brickbyte-backend.onrender.com
 - ML Model: https://brickbyte-ml.onrender.com
 
+## 🌐 Live Demo
+
+- **Deployed Application**: [https://brickbytev24.vercel.app](https://brickbytev24.vercel.app)
+- **Demo Video**: [https://youtu.be/jYuMzdXD75I](https://youtu.be/jYuMzdXD75I)
+
 ## 📝 Usage Guide
 
 1. **User Registration**
-   - Navigate to https://brickbyte.vercel.app/register
+   - Navigate to https://brickbytev24.vercel.app/register
    - Fill in your details and create an account
    - Connect your MetaMask wallet
 
@@ -276,4 +302,14 @@ For security concerns, please email security@brickbyte.com or create a security 
 - Chainlink for oracle services
 - Supabase for database infrastructure
 - Vercel and Render for deployment infrastructure
-- The Ethereum community for development tools and resources 
+- The Ethereum community for development tools and resources
+
+---
+
+<div align="center">
+  <p>Built with ❤️ by Sudhansu Kumar</p>
+  <p>
+    <a href="https://github.com/sudhansu-24">GitHub</a> •
+    <a href="https://linkedin.com/in/sudhansu-kumar-24">LinkedIn</a>
+  </p>
+</div> 
