@@ -18,7 +18,7 @@ export default function Footer() {
                   width={140} 
                   height={40}
                   priority
-                  className="invert dark:invert-100 transition-all duration-300"
+                  className="invert dark:invert-0 transition-all duration-300"
                 />
               </span>
             </Link>

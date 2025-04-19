@@ -8,13 +8,22 @@ const nextConfig = {
     };
     return config;
   },
-  // Ensure proper module resolution
-  experimental: {
-    esmExternals: 'loose',
-  },
-  // Add proper image domains if needed
+  // Configure remote image patterns
   images: {
-    domains: ['brickbyte-backend.onrender.com', 'brickbyte-ml.onrender.com', 'sfcexboguumqecgcjfmj.supabase.co'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'brickbyte-backend.onrender.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'brickbyte-ml.onrender.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'sfcexboguumqecgcjfmj.supabase.co',
+      },
+    ],
   },
 }
 
