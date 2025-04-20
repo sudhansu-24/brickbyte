@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #6dd5fa, #ffffff);
+            font-family: 'Segoe UI', sans-serif;
+            padding-top: 50px;
+        }
+        .form-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+        .btn-custom {
+            background-color: #28a745;
+            color: white;
+        }
+        .prediction-box {
+            margin-top: 20px;
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="col-md-6 offset-md-3 form-container">
+        <h3 class="text-center mb-4">🏙️ House Price Predictor</h3>
+        <form method="POST" action="/predict">
+            <!-- Numeric Inputs -->
+            {% for feature in feature_names[:7] %}
+                <div class="mb-3">
+                    <label for="{{ feature }}" class="form-label">{{ feature.replace('_', ' ').replace(' (%)', ' (%)').replace(' (Out of 5)', '').replace(' (Out of 100)', '') }}</label>
+                    <input type="number" step="any" class="form-control" name="{{ feature }}" required>
+                </div>
+            {% endfor %}
+
+            <!-- City Dropdown -->
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <select class="form-select" name="city" required>
+                    {% for city in feature_names[7:] %}
+                        <option value="{{ city }}">{{ city }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Submit -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-custom w-100">Predict Price</button>
+            </div>
+        </form>
+
+        {% if prediction %}
+            <div class="alert alert-info prediction-box text-center">
+                {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>

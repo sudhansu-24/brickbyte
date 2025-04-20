@@ -48,8 +48,6 @@ ENV/
 *.swo
 
 # Large data files
-*.csv
-!Future_years.csv
 *.parquet
 *.feather
 
