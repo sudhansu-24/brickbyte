@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: brickbyte
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --workers 3 app:app  # Added workers
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9 # Using a more general version
+      # Add other environment variables here
+      # - key: API_KEY
+      #   value: your_api_key
