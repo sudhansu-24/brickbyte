@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { RealEstateToken } from "../typechain-types";
+import { RealEstateToken } from "../typechain-types";  //Just for test purpose
 
 describe("RealEstateToken", function () {
   let realEstateToken: RealEstateToken;
