@@ -3,7 +3,7 @@ services:
     name: brickbyte
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn --workers 3 app:app  # Added workers for better performance
+    startCommand: gunicorn --workers 3 app:app  # Added worker
     envVars:
       - key: PYTHON_VERSION
         value: 3.9 
