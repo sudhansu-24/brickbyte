@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ChevronLeft, ChevronRight, Star } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// Mock content for testimonials 
+// Mocks for testimonials 
 const testimonials = [
   {
     id: 1,
