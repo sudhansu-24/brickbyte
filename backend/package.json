@@ -1,7 +1,7 @@
 {
   "name": "brickbyte-backend",
   "version": "1.0.0",
-  "description": "Backend server for BRICKBYTE platform",
+  "description": "Backend server for BRICKBYTE",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
