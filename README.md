@@ -217,6 +217,8 @@ npx hardhat run scripts/deploy.js --network sepolia
 1. Start the ML model server:
 ```bash
 cd ml-model
+python3.11 venv venv
+scource venv/bin/activate
 python scripts/valuation.py
 ```
 
