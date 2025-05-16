@@ -35,7 +35,7 @@ export default function Hero() {
   // Determine which Spline scene to use based on theme
   const splineScene = theme === "dark" 
     ? "https://prod.spline.design/iFxzddLHhx6KA0iB/scene.splinecode"
-    : "https://prod.spline.design/Id21W5YWAPXfvdB3/scene.splinecode"
+    : "https://prod.spline.design/Id21W5YWAPXfvdB3/scene.splinecode"   //--no background 3d element
 
   return (
     <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48">
