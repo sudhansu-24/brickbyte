@@ -16,12 +16,12 @@ const config: HardhatUserConfig = {
     }
   },
   networks: {
-    sepolia: {
-      url: process.env.SEPOLIA_RPC_URL || "",
+    bscTestnet: {
+      url: process.env.BSC_RPC_URL || "",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
     hardhat: {
-      chainId: 31337
+      chainId: 97
     }
   },
   paths: {
@@ -30,7 +30,7 @@ const config: HardhatUserConfig = {
     cache: "./cache",
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY
+    apiKey: process.env.BSCSCAN_API_KEY
   }
 };
 
