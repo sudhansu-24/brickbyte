@@ -294,7 +294,7 @@ export default function PropertyDetails() {
             <Card>
               <CardContent className="pt-6">
                 <p className="text-sm text-muted-foreground">Price per Share</p>
-                <p className="text-2xl font-semibold">{property.price_per_share} ETH</p>
+                <p className="text-2xl font-semibold">{property.price_per_share} BNB</p>
               </CardContent>
             </Card>
             <Card>
