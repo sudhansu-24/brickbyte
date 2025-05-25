@@ -180,7 +180,7 @@ PORT=8000
 Contracts (.env):
 ```env
 PRIVATE_KEY=your_wallet_private_key
-BNB_RPC_URL=your_sepolia_rpc_url
+BNB_RPC_URL=your_bnb_rpc_url
 ```
 
 ### Deployment
@@ -218,7 +218,7 @@ npx hardhat run scripts/deploy.js --network sepolia
 ```bash
 cd ml-model
 python3.11 -m venv venv
-scource venv/bin/activate
+source venv/bin/activate
 python scripts/api.py
 ```
 
