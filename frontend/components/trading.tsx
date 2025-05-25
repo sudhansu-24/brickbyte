@@ -111,7 +111,7 @@ export default function Trading() {
     if (property) {
       // Show AI suggestion
       const suggestion = activeTab === "buy" 
-        ? `Suggested buy price: ${(property.price_per_share * 0.98).toFixed(4)} ETH (2% below market)`
+        ? `Suggested buy price: ${(property.price_per_share * 0.98).toFixed(4)} BNB (2% below market)`
         : "Consider holding for 2 more weeks for a potential 5% price increase."
       
       toast({
@@ -325,7 +325,7 @@ export default function Trading() {
                         <SelectContent>
                           {properties.map((property) => (
                             <SelectItem key={property.id} value={property.id}>
-                              {property.name} - {property.price_per_share} ETH
+                              {property.name} - {property.price_per_share} BNB
                             </SelectItem>
                           ))}
                         </SelectContent>
