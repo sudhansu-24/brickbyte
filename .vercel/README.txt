@@ -1,11 +1,20 @@
-> Why do I have a folder named ".vercel" in my project?
-The ".vercel" folder is created when you link a directory to a Vercel project.
 
-> What does the "project.json" file contain?
-The "project.json" file contain:
-- The ID of the Vercel project that you linked ("projectId")
-- The ID of the user or team your Vercel project is owned by ("orgId")
+<div align="center">
+  
+<br />
 
-> Should I commit the ".vercel" folder?
-No, you should not share the ".vercel" folder with anyone.
-Upon creation, it will be automatically added to your ".gitignore" file.
+  <h2 align="center">Brickbyte</h2>
+
+  Krishi Sparsh is a fully responsive contract farming website, <br />Responsive for all devices, build using Next.js15, tailwind css, blockchain & powered by AI.
+
+  <a href="https://brickbyte.vercel.app/" target="_blank"><strong>➥ Live Demo</strong></a>
+
+</div>
+
+<br />
+
+
+
+### Contact
+
+If you want to contact with me you can reach me at [Twitter](https://www.twitter.com/Sudhansu_24).
