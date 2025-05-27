@@ -5,7 +5,7 @@
 ![Landing Page](frontend/screenshots/brick-banner.png)
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://brickbyte.vercel.app)
-[![Demo Video](https://img.shields.io/badge/Watch%20Demo-Video-red?style=for-the-badge&logo=youtube)](https://youtu.be/5JyEA_2Ivic)
+[![Demo Video](https://img.shields.io/badge/Watch%20Demo-Video-red?style=for-the-badge&logo=youtube)](https://youtu.be/jYuMzdXD75I)
 
 </div>
 
@@ -74,7 +74,7 @@ BRICKBYTE is a decentralized platform that enables fractional ownership of real 
 - Render (Deployment)
 
 ### Blockchain
-- BNB Smart Chain (testnet)
+- Etherium Sepolia (testnet)
 
 ## 📁 Project Structure
 
@@ -156,7 +156,7 @@ Frontend (.env.local):
 ```env
 NEXT_PUBLIC_API_URL=https://brickbyte-backend.onrender.com
 NEXT_PUBLIC_ML_API_URL=https://brickbyte-ml.onrender.com
-NEXT_PUBLIC_BNB_RPC_URL=YOUR_RPC_URL_PROVIDER
+NEXT_PUBLIC_ETH_RPC_URL=YOUR_RPC_URL_PROVIDER
 NEXT_PUBLIC_CONTRACT_ADDRESS=0xb39c11D2F62f3fADd1d1f5D3935e1D1b3e6D8FAb
 NEXT_PUBLIC_SUPABASE_URL=https://sfcexboguumqecgcjfmj.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -180,7 +180,7 @@ PORT=8000
 Contracts (.env):
 ```env
 PRIVATE_KEY=your_wallet_private_key
-BNB_RPC_URL=your_bnb_rpc_url
+ETH_RPC_URL=your_eth_rpc_url
 ```
 
 ### Deployment
@@ -279,7 +279,7 @@ Common issues and solutions:
 2. **MetaMask Connection Issues**
    - Ensure MetaMask is installed and unlocked
    - Check if you're connected to Sepolia testnet
-   - Verify your account has sufficient test BNB
+   - Verify your account has sufficient test ETH
 
 3. **Backend Connection Errors**
    - Check if backend server is running
@@ -293,7 +293,7 @@ Common issues and solutions:
    - Ensure proper CORS configuration
 
 5. **Smart Contract Deployment**
-   - Ensure you have sufficient test BNB
+   - Ensure you have sufficient test eth
    - Verify network configuration in hardhat.config.js
    - Check contract compilation for errors
 
@@ -319,7 +319,7 @@ For security concerns, please email at brickbyte24@gmail.com or create a securit
 - Chainlink for oracle services
 - Supabase for database infrastructure
 - Vercel and Render for deployment infrastructure
-- The BNB community for development tools and resources
+- The Etherium community for development tools and resources
 
 ---
 
@@ -330,3 +330,4 @@ For security concerns, please email at brickbyte24@gmail.com or create a securit
     <a href="https://www.linkedin.com/in/sudhansushekhar">LinkedIn</a>
   </p>
 </div> 
+
