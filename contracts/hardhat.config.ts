@@ -17,7 +17,7 @@ const config: HardhatUserConfig = {
   },
   networks: {
     bscTestnet: {
-      url: process.env.BSC_RPC_URL || "",
+      url: process.env.SEPOLIA_RPC_URL || "",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
     hardhat: {
@@ -30,7 +30,7 @@ const config: HardhatUserConfig = {
     cache: "./cache",
   },
   etherscan: {
-    apiKey: process.env.BSCSCAN_API_KEY
+    apiKey: process.env.ETHERSCAN_API_KEY
   }
 };
 
