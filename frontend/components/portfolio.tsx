@@ -284,7 +284,7 @@ export default function Portfolio() {
                           <p className="text-sm text-muted-foreground">Token Value</p>
                           <p className="font-semibold flex items-center">
                             <DollarSign className="h-4 w-4 mr-1" />
-                            {(share.shares * share.properties.price_per_share).toFixed(2)} BNB
+                            {(share.shares * share.properties.price_per_share).toFixed(2)} ETH
                           </p>
                         </div>
                         <div>
@@ -294,7 +294,7 @@ export default function Portfolio() {
                             {share.properties.rental_income && share.properties.total_shares ? 
                               (share.shares * share.properties.rental_income / share.properties.total_shares).toFixed(2) :
                               (share.shares * share.properties.rental_yield / 100 * share.properties.price_per_share / 12).toFixed(2)
-                            } BNB
+                            } ETH
                           </p>
                         </div>
                       </div>
@@ -358,7 +358,7 @@ export default function Portfolio() {
                         <CardTitle className="text-sm font-medium text-muted-foreground">Total Value</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <div className="text-2xl font-bold">{calculateTotalValue().toFixed(2)} BNB</div>
+                        <div className="text-2xl font-bold">{calculateTotalValue().toFixed(2)} ETH</div>
                         <p className="text-xs text-muted-foreground">+0% from initial investment</p>
                       </CardContent>
                     </Card>
@@ -367,7 +367,7 @@ export default function Portfolio() {
                         <CardTitle className="text-sm font-medium text-muted-foreground">Monthly Income</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <div className="text-2xl font-bold">{calculateMonthlyIncome().toFixed(2)} BNB</div>
+                        <div className="text-2xl font-bold">{calculateMonthlyIncome().toFixed(2)} ETH</div>
                         <p className="text-xs text-muted-foreground">Passive rental income</p>
                       </CardContent>
                     </Card>
@@ -376,7 +376,7 @@ export default function Portfolio() {
                         <CardTitle className="text-sm font-medium text-muted-foreground">Staking Rewards</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <div className="text-2xl font-bold">0.00 BNB</div>
+                        <div className="text-2xl font-bold">0.00 ETH</div>
                         <p className="text-xs text-muted-foreground">From staked property tokens</p>
                       </CardContent>
                     </Card>
@@ -409,7 +409,7 @@ export default function Portfolio() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className="font-medium">{(transaction.shares * transaction.price_per_share).toFixed(2)} BNB</p>
+                          <p className="font-medium">{(transaction.shares * transaction.price_per_share).toFixed(2)} ETH</p>
                           <p className="text-sm text-muted-foreground">
                             {new Date(transaction.created_at).toLocaleDateString()}
                           </p>
