@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "BrickByte",
   description: "Invest in real estate properties using blockchain technology",
+  verification: {
+    google: "I7qFz3JjR3w6dZXJl1VXQGDvdzK_HURhjVGQ2AwN9_U",
+  },
 }
 
 export default function RootLayout({
