@@ -209,6 +209,7 @@ ETH_RPC_URL=your_eth_rpc_url
 4. **Smart Contract Deployment**
 ```bash
 cd contracts
+npx hardhat compile
 npx hardhat run scripts/deploy.js --network sepolia
 ```
 
