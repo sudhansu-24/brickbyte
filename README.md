@@ -210,7 +210,7 @@ ETH_RPC_URL=your_eth_rpc_url
 ```bash
 cd contracts
 npx hardhat compile
-npx hardhat run scripts/deploy.js --network sepolia
+npx hardhat run scripts/deploy.ts --network sepolia
 ```
 
 ### Running Locally
